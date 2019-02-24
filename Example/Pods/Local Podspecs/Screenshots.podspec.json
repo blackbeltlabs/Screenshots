@@ -1,0 +1,27 @@
+{
+  "name": "Screenshots",
+  "version": "0.1.0",
+  "summary": "A short description of Screenshots.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Mirko Kiefer/Screenshots",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Mirko Kiefer": "mail@mirkokiefer.com"
+  },
+  "source": {
+    "git": "https://github.com/Mirko Kiefer/Screenshots.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "osx": "10.13"
+  },
+  "source_files": "Screenshots/Classes/**/*",
+  "dependencies": {
+    "SwiftDirectoryWatcher": [
+      "0.0.6"
+    ]
+  }
+}
