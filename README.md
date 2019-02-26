@@ -1,4 +1,4 @@
-# Screenshots
+# Screenshots for Swift and macOS
 
 [![CI Status](https://img.shields.io/travis/mirkokiefer/Screenshots.svg?style=flat)](https://travis-ci.org/mirkokiefer/Screenshots)
 [![Version](https://img.shields.io/cocoapods/v/Screenshots.svg?style=flat)](https://cocoapods.org/pods/Screenshots)
