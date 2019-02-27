@@ -25,7 +25,7 @@ public struct Screenshot {
   public var error: ScreenshotError?
   public var retries: Int
   
-  func delete() {
+  public func delete() {
     try? FileManager.default.removeItem(at: url)
   }
 }
