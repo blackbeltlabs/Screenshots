@@ -10,10 +10,13 @@ public enum ScreenshotError: String, Error {
   case missingMetadataRectProperty
 }
 
-public protocol ScreenshotWatcher {
+public protocol ScreenshotWatcher: class {
   var delegate: ScreenshotWatcherDelegate? { get set }
   var maxRetries: Int { get set }
   var retryWait: Double { get set }
+  
+  func start()
+  func stop()
 }
 
 public struct Screenshot {
@@ -84,7 +87,7 @@ public class SystemScreenshotWatcher: ScreenshotWatcher {
   public var maxRetries = DEFAULT_MAX_RETRIES
   public var retryWait = DEFAULT_RETRY_WAIT
   
-  static var shared = SystemScreenshotWatcher()
+  public static var shared = SystemScreenshotWatcher()
   
   public var delegate: ScreenshotWatcherDelegate?
   
@@ -102,6 +105,10 @@ public class SystemScreenshotWatcher: ScreenshotWatcher {
   
   public func start() {
     directoryWatcher.start()
+  }
+  
+  public func stop() {
+    directoryWatcher.stop()
   }
 }
 
@@ -149,6 +156,10 @@ public class ScreenshotCLI: ScreenshotWatcher {
   
   public func start() {
     directoryWatcher.start()
+  }
+  
+  public func stop() {
+    directoryWatcher.stop()
   }
   
   func createScreenshotURL() -> URL {
