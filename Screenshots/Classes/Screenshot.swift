@@ -30,6 +30,10 @@ public struct Screenshot {
   }
 }
 
+public protocol ScreenshotTaskDelegate {
+  func screenshotCLITaskCompleted(_ screenshotCLI: ScreenshotCLI)
+}
+
 public protocol ScreenshotWatcherDelegate {
   func screenshotWatcher(_ watcher: ScreenshotWatcher, didCapture screenshot: Screenshot)
 }
@@ -139,6 +143,7 @@ public class ScreenshotCLI: ScreenshotWatcher {
   public static var shared = ScreenshotCLI()
   
   public var delegate: ScreenshotWatcherDelegate?
+  public var taskDelegate: ScreenshotTaskDelegate?
   
   public lazy var screenshotDirectory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
   
@@ -185,6 +190,8 @@ public class ScreenshotCLI: ScreenshotWatcher {
       
       task.launch()
       task.waitUntilExit()
+      
+      self.taskDelegate?.screenshotCLITaskCompleted(self)
       
       self.task = nil
       
