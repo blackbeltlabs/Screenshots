@@ -24,6 +24,7 @@ class ViewController: NSViewController {
     systemScreenshots.start()
     
     cliScreenshots.delegate = self
+    cliScreenshots.taskDelegate = self
     cliScreenshots.start()
   }
 
@@ -55,5 +56,11 @@ extension ViewController: ScreenshotWatcherDelegate {
     textField.stringValue = "Success rect: \(screenshot.rect!), retries: \(screenshot.retries)"
     let image = NSImage(byReferencing: screenshot.url)
     imageView.image = image
+  }
+}
+
+extension ViewController: ScreenshotTaskDelegate {
+  func screenshotCLITaskCompleted(_ screenshotCLI: ScreenshotCLI) {
+    print("Screenshot task is completed")
   }
 }
