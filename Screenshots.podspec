@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Screenshots'
-  s.version          = '0.3.0'
+  s.version          = '0.3.1'
   s.summary          = 'Create screenshots on macOS via the screencapture CLI.'
 
   s.description      = <<-DESC
@@ -18,5 +18,5 @@ It also supports watching Desktop for any system screenshots.
   s.osx.deployment_target = "10.13"
   s.swift_version = "4.2"
   s.source_files = 'Screenshots/Classes/**/*'
-  s.dependency 'SwiftDirectoryWatcher', '0.0.6'
+  s.dependency 'SwiftDirectoryWatcher', '0.0.7'
 end
