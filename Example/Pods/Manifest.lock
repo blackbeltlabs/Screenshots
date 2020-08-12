@@ -1,23 +1,22 @@
 PODS:
-  - Screenshots (0.1.0):
-    - SwiftDirectoryWatcher (= 0.0.6)
-  - SwiftDirectoryWatcher (0.0.6)
+  - Screenshots (0.3.2):
+    - SwiftDirectoryWatcher (= 0.0.8)
+  - SwiftDirectoryWatcher (0.0.8)
 
 DEPENDENCIES:
   - Screenshots (from `../`)
-
-SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - SwiftDirectoryWatcher
+  - SwiftDirectoryWatcher (from `../SwiftDirectoryWatcher/`)
 
 EXTERNAL SOURCES:
   Screenshots:
     :path: "../"
+  SwiftDirectoryWatcher:
+    :path: "../SwiftDirectoryWatcher/"
 
 SPEC CHECKSUMS:
-  Screenshots: 3ead2cea818f7389ea7bb3ffa19bb0d40768d145
-  SwiftDirectoryWatcher: 706b89701842ed1f098405e850d373b0f716c3b2
+  Screenshots: 885280e766e0a55bcf5a953bbf9b0edfc63913f8
+  SwiftDirectoryWatcher: 1cb5917131947e2b2dc92d925c19b1c7248da202
 
-PODFILE CHECKSUM: 91a41c7b9bab063246044be6b70fa93075c634c9
+PODFILE CHECKSUM: 195199a4448cd13b758aa2ee99807bd5d78a3cfb
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.9.3
