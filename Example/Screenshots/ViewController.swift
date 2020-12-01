@@ -13,6 +13,7 @@ class ViewController: NSViewController {
 
   @IBOutlet var imageView: NSImageView!
   @IBOutlet var textField: NSTextField!
+  @IBOutlet weak var soundEnabledField: NSButton!
   
   lazy var cliScreenshots = ScreenshotCLI()
   lazy var systemScreenshots = SystemScreenshotWatcher()
@@ -26,6 +27,8 @@ class ViewController: NSViewController {
     cliScreenshots.delegate = self
     cliScreenshots.taskDelegate = self
     cliScreenshots.start()
+    
+    cliScreenshots.soundEnabled = soundEnabledField.state == .on
   }
 
   override var representedObject: Any? {
@@ -36,6 +39,10 @@ class ViewController: NSViewController {
 
   @IBAction func didTapCreateScreenshot(sender: Any) {
     cliScreenshots.createScreenshot()
+  }
+  
+  @IBAction func soundEnabledPressed(_ sender: Any) {
+    cliScreenshots.soundEnabled = soundEnabledField.state == .on
   }
 }
 

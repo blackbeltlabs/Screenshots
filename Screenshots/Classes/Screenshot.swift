@@ -154,6 +154,10 @@ public class ScreenshotCLI: ScreenshotWatcher {
   }()
   
   var task: Process?
+    
+  // MARK: - Screenshot parameters
+  
+  public var soundEnabled: Bool = true
   
   public init() {
     
@@ -179,11 +183,19 @@ public class ScreenshotCLI: ScreenshotWatcher {
     }
     
     let url = createScreenshotURL()
+    let soundEnabled = self.soundEnabled
     
     DispatchQueue.global(qos: .userInteractive).async {
       let task = Process()
       task.launchPath = "/usr/sbin/screencapture"
-      task.arguments = ["-i", url.path]
+      
+      var args: String = "-i"
+      
+      if !soundEnabled {
+        args.append("x")
+      }
+      
+      task.arguments = [args, url.path]
       task.qualityOfService = .userInteractive
       
       self.task = task
