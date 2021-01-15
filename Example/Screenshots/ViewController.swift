@@ -44,6 +44,14 @@ class ViewController: NSViewController {
   @IBAction func soundEnabledPressed(_ sender: Any) {
     cliScreenshots.soundEnabled = soundEnabledField.state == .on
   }
+  
+  @IBAction func captureWindowPressed(_ sender: Any) {
+    cliScreenshots.captureWindow { [weak self] (url) in
+      guard let self = self, let url = url else { return }
+      self.imageView.image = NSImage(contentsOf: url)
+    }
+  }
+  
 }
 
 extension ViewController: ScreenshotWatcherDelegate {

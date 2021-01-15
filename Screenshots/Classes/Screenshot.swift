@@ -145,7 +145,7 @@ public class ScreenshotCLI: ScreenshotWatcher {
   public var delegate: ScreenshotWatcherDelegate?
   public var taskDelegate: ScreenshotTaskDelegate?
   
-  public lazy var screenshotDirectory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+  public lazy var screenshotDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
   
   lazy var directoryWatcher: DirectoryWatcher = {
     let watcher = DirectoryWatcher(url: screenshotDirectory)
@@ -177,6 +177,12 @@ public class ScreenshotCLI: ScreenshotWatcher {
       .appendingPathExtension("png")
   }
   
+  func createWindowCaptureURL() -> URL {
+    return screenshotDirectory
+      .appendingPathComponent("Window capture " + UUID().uuidString)
+      .appendingPathExtension("png")
+  }
+  
   public func createScreenshot() {
     if task != nil {
       return
@@ -189,7 +195,7 @@ public class ScreenshotCLI: ScreenshotWatcher {
       let task = Process()
       task.launchPath = "/usr/sbin/screencapture"
       
-      var args: String = "-i"
+      var args: String = "-s"
       
       if !soundEnabled {
         args.append("x")
@@ -212,6 +218,50 @@ public class ScreenshotCLI: ScreenshotWatcher {
         return
       }
     }
+  }
+  
+  public func captureWindow(completion: @escaping ((URL?) -> Void)) {
+    if task != nil {
+      completion(nil)
+      return
+    }
+    
+    let url = createWindowCaptureURL()
+    let soundEnabled = self.soundEnabled
+    
+      DispatchQueue.global(qos: .userInteractive).async {
+        let task = Process()
+        task.launchPath = "/usr/sbin/screencapture"
+        var args: String = "-w"
+        
+        if !soundEnabled {
+          args.append("x")
+        }
+      
+        task.arguments = [args, url.path]
+        task.qualityOfService = .userInteractive
+      
+        self.task = task
+      
+        task.launch()
+        task.waitUntilExit()
+          
+        self.task = nil
+        
+        if task.terminationStatus == 0 {
+          DispatchQueue.main.async {
+            completion(url)
+            return
+          }
+        } else {
+      
+          if task.terminationStatus != 0 {
+            print("Error: task.terminationStatus != 0")
+            completion(nil)
+            return
+          }
+        }
+      }
   }
 }
 
