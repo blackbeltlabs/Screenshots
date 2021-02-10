@@ -235,7 +235,7 @@ public class ScreenshotCLI: ScreenshotWatcher {
       .appendingPathExtension("png")
   }
   
-  public func createScreenshot() {
+  public func createScreenshot(completion: @escaping (Result<Screenshot, Error>) -> Void) {
     if task != nil {
       return
     }
@@ -261,7 +261,7 @@ public class ScreenshotCLI: ScreenshotWatcher {
       task.launch()
       task.waitUntilExit()
       
-     // getAttributes(for: url)
+     
       
       self.taskDelegate?.screenshotCLITaskCompleted(self)
       
@@ -270,6 +270,9 @@ public class ScreenshotCLI: ScreenshotWatcher {
       if task.terminationStatus != 0 {
         print("Error: task.terminationStatus != 0")
         return
+      } else {
+        let attributes = getAttributes(for: url)
+        completion(.success(.init(url: url, rect: attributes, error: nil, retries: 0)))
       }
     }
   }

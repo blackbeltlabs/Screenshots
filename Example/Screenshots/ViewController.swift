@@ -38,7 +38,18 @@ class ViewController: NSViewController {
   }
 
   @IBAction func didTapCreateScreenshot(sender: Any) {
-    cliScreenshots.createScreenshot()
+    cliScreenshots.createScreenshot { (result) in
+      switch result {
+      case .success(let screenshot):
+        DispatchQueue.main.async {
+          self.textField.stringValue = "Success rect: \(screenshot.rect), retries: \(screenshot.retries)"
+          let image = NSImage(byReferencing: screenshot.url)
+          self.imageView.image = image
+        }
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    }
   }
   
   @IBAction func soundEnabledPressed(_ sender: Any) {
