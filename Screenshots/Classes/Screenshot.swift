@@ -65,17 +65,68 @@ func readUntilDefined<T>(
   }
 }
 
+func getAttributes(for url: URL) -> CGRect? {
+  let task = Process()
+  let pipe = Pipe()
+  
+  task.standardOutput = pipe
+  task.launchPath = "/usr/bin/xattr"
+  
+  task.arguments = ["-p", "com.apple.metadata:kMDItemScreenCaptureGlobalRect", url.path]
+  //task.arguments = [url.path]
+  task.qualityOfService = .userInteractive
+  task.launch()
+  task.waitUntilExit()
+  
+  guard task.terminationStatus == 0 else { return nil}
+  
+  let output = pipe.fileHandleForReading.availableData
+  
+  print(output.count)
+  
+  let outputString = String(data: output, encoding: String.Encoding.utf8) ?? ""
+  
+  guard let hexademical = outputString.hexadecimal else {
+    return nil
+  }
+  print(outputString)
+  
+  do {
+    var format = PropertyListSerialization.PropertyListFormat.binary
+    guard let attributes = try PropertyListSerialization.propertyList(from: hexademical,
+                                                                        format: &format) as? [Int] else {
+      return nil
+    }
+    
+    
+    if attributes.count == 4 {
+      return CGRect(x: attributes[0],
+                    y: attributes[1],
+                    width: attributes[2],
+                    height: attributes[3])
+    } else {
+      return nil
+    }
+  } catch let error {
+    print(error)
+    return nil
+  }
+ 
+}
+
+
 extension URL: ScreenshotURL {
   var screenCaptureRect: CGRect? {
-    guard let item = NSMetadataItem(url: self) else {
-      return nil
-    }
-    
-    guard let attributes = item.value(forAttribute: "kMDItemScreenCaptureGlobalRect") as? [Int] else {
-      return nil
-    }
-    
-    return CGRect(x: attributes[0], y: attributes[1], width: attributes[2], height: attributes[3])
+    return getAttributes(for: self)
+//    guard let item = NSMetadataItem(url: self) else {
+//      return nil
+//    }
+//
+//    guard let attributes = item.value(forAttribute: "kMDItemScreenCaptureGlobalRect") as? [Int] else {
+//      return nil
+//    }
+//
+//    return CGRect(x: attributes[0], y: attributes[1], width: attributes[2], height: attributes[3])
   }
   
   func readScreenCaptureRect(retries: Int, wait: Double, result: @escaping (CGRect?, Int) -> Void) {
@@ -155,6 +206,7 @@ public class ScreenshotCLI: ScreenshotWatcher {
   
   var task: Process?
     
+    
   // MARK: - Screenshot parameters
   
   public var soundEnabled: Bool = true
@@ -209,6 +261,8 @@ public class ScreenshotCLI: ScreenshotWatcher {
       task.launch()
       task.waitUntilExit()
       
+     // getAttributes(for: url)
+      
       self.taskDelegate?.screenshotCLITaskCompleted(self)
       
       self.task = nil
@@ -219,6 +273,7 @@ public class ScreenshotCLI: ScreenshotWatcher {
       }
     }
   }
+  
   
   public func captureWindow(completion: @escaping ((URL?) -> Void)) {
     if task != nil {
@@ -283,4 +338,30 @@ extension ScreenshotCLI: DirectoryWatcherDelegate {
       self.delegate?.screenshotWatcher(self, didCapture: screenshot)
     }
   }
+}
+
+
+extension String {
+
+    /// Create `Data` from hexadecimal string representation
+    ///
+    /// This creates a `Data` object from hex string. Note, if the string has any spaces or non-hex characters (e.g. starts with '<' and with a '>'), those are ignored and only hex characters are processed.
+    ///
+    /// - returns: Data represented by this hexadecimal string.
+
+    var hexadecimal: Data? {
+        var data = Data(capacity: count / 2)
+
+        let regex = try! NSRegularExpression(pattern: "[0-9a-f]{1,2}", options: .caseInsensitive)
+        regex.enumerateMatches(in: self, range: NSRange(startIndex..., in: self)) { match, _, _ in
+            let byteString = (self as NSString).substring(with: match!.range)
+            let num = UInt8(byteString, radix: 16)!
+            data.append(num)
+        }
+
+        guard data.count > 0 else { return nil }
+
+        return data
+    }
+
 }
