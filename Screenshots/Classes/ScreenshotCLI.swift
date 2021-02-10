@@ -25,10 +25,6 @@ public class ScreenshotCLI {
   }
   
   public func createScreenshot(completion: @escaping (Result<Screenshot, Error>) -> Void) {
-//    if task != nil {
-//      return
-//    }
-    
     let url = createScreenshotURL()
     let soundEnabled = self.soundEnabled
     
@@ -117,7 +113,7 @@ public class ScreenshotCLI {
       }
   }
   
-  func getAttributes(for url: URL) -> CGRect? {
+  private func getAttributes(for url: URL) -> CGRect? {
     let task = Process()
     let pipe = Pipe()
     
