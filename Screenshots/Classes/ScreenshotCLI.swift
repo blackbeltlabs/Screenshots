@@ -2,7 +2,7 @@ import Cocoa
 
 public class ScreenshotCLI {
     
-  public lazy var screenshotDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+  public lazy var screenshotDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
   
   // MARK: - Screenshot parameters
   
@@ -12,20 +12,24 @@ public class ScreenshotCLI {
     
   }
   
-  func createScreenshotURL() -> URL {
-    return screenshotDirectory
+  func createScreenshotURL() -> URL? {
+    return screenshotDirectory?
       .appendingPathComponent("Screen Shot " + UUID().uuidString)
       .appendingPathExtension("png")
   }
   
-  func createWindowCaptureURL() -> URL {
-    return screenshotDirectory
+  func createWindowCaptureURL() -> URL? {
+    return screenshotDirectory?
       .appendingPathComponent("Window capture " + UUID().uuidString)
       .appendingPathExtension("png")
   }
   
   public func createScreenshot(completion: @escaping (Result<Screenshot, Error>) -> Void) {
-    let url = createScreenshotURL()
+    guard let url = createScreenshotURL() else {
+      completion(.failure(ScreenshotError.screenshotDirectoryIsInvalid))
+      return
+    }
+    
     let soundEnabled = self.soundEnabled
     
     DispatchQueue.global(qos: .userInteractive).async { [weak self] in
@@ -79,7 +83,11 @@ public class ScreenshotCLI {
   
   public func captureWindow(completion: @escaping ((URL?) -> Void)) {
    
-    let url = createWindowCaptureURL()
+    guard let url = createWindowCaptureURL() else {
+      completion(nil)
+      return
+    }
+    
     let soundEnabled = self.soundEnabled
     
       DispatchQueue.global(qos: .userInteractive).async {
