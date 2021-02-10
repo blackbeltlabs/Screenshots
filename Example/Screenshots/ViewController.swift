@@ -16,12 +16,10 @@ class ViewController: NSViewController {
   @IBOutlet weak var soundEnabledField: NSButton!
   
   lazy var cliScreenshots = ScreenshotCLI()
- // lazy var systemScreenshots = SystemScreenshotWatcher()
   
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    cliScreenshots.taskDelegate = self
     cliScreenshots.soundEnabled = soundEnabledField.state == .on
   }
 
@@ -36,7 +34,7 @@ class ViewController: NSViewController {
       switch result {
       case .success(let screenshot):
         DispatchQueue.main.async {
-          self.textField.stringValue = "Success rect: \(screenshot.rect), retries: \(screenshot.retries)"
+          self.textField.stringValue = "Success rect: \(String(describing: screenshot.rect))"
           let image = NSImage(byReferencing: screenshot.url)
           self.imageView.image = image
         }
@@ -57,10 +55,4 @@ class ViewController: NSViewController {
     }
   }
   
-}
-
-extension ViewController: ScreenshotTaskDelegate {
-  func screenshotCLITaskCompleted(_ screenshotCLI: ScreenshotCLI) {
-    print("Screenshot task is completed")
-  }
 }

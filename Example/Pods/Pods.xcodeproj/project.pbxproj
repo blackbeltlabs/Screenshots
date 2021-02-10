@@ -8,27 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		0DD2BFA2B7C20804A491FFEB1176480D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1430F003D39D9906881A6AC724B7931 /* Cocoa.framework */; };
-		127EA9E0862AB32C0CCFA7632179438E /* Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6E33B7FADB091DDF70C842E672E0EA /* Screenshot.swift */; };
 		133C1F800F6741066B3C5504DEAA2DBC /* Pods-Screenshots_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BF3452684FFAB3642CB7A8A9CB11EB0F /* Pods-Screenshots_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		286A8ABDD90A97D0A911FBB7903914CD /* Pods-Screenshots_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A3FEFCA7C98EECC85FB4254CD86EA3F /* Pods-Screenshots_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4FBFEEB7B3B06DD17E19F0186A440CEE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5C9F67CB5D412624CE6A5AB6D85563 /* StringExtension.swift */; };
-		5B9255ED813D49FD48D17B1656B86842 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1430F003D39D9906881A6AC724B7931 /* Cocoa.framework */; };
+		6D0F162DC3B8519A6DCBA13E9E512587 /* Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6FD4CBEFBE3FB09422D43E67A6C4B /* Screenshot.swift */; };
 		7AA9E18C2D6D50639060DF43138C6F27 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1430F003D39D9906881A6AC724B7931 /* Cocoa.framework */; };
-		7F44DE4CDAF793689303B650EE7E2E1D /* Screenshots-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A901424F8697205B429D87B3589894 /* Screenshots-dummy.m */; };
+		7B8116297ED33AA14C831B1460431BA4 /* ScreenshotCLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A180AA9828AE797B91A649108C013E35 /* ScreenshotCLI.swift */; };
+		7F9295BA12BD92A07A1EAFFD3C4A6F89 /* Screenshots-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C8A1E70D0103B81B8F27C330F556E477 /* Screenshots-dummy.m */; };
 		A799BEB8E075C0AF572F6D0246A292C7 /* Pods-Screenshots_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3D4AADA9AB4DD69EF9D5351B59A015 /* Pods-Screenshots_Tests-dummy.m */; };
+		AEACCD908BCA51B164E96C61F82654D9 /* Screenshots-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D45CA0B5603FE8752342BCF4C02D78 /* Screenshots-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFD6C01B25BBE3A3809ABD9A4AEA3BDA /* Pods-Screenshots_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BC379573121137E4F89DC5C14908D6 /* Pods-Screenshots_Example-dummy.m */; };
-		EEC51511C45313C4D60D3B8FD4E012A1 /* Screenshots-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B7D3ADCC5A1608B03C9866FE41B942FB /* Screenshots-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B8BCBD5BD11C3BF201F2A29960130345 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7086D4E11A9A59AA1F4323C645650 /* StringExtension.swift */; };
+		C85AE9806EE21B3F1C7D92AF288A9EEF /* ScreenshotError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F3E8035C5F6BFC31A57DC82DE1A14 /* ScreenshotError.swift */; };
+		D5FB2069A30CD77BF077E017B012A7B4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1430F003D39D9906881A6AC724B7931 /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		92738E4172491B15FA545880005011B7 /* PBXContainerItemProxy */ = {
+		152CCF1FA33E7B65547ADB3D32705A19 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 3A0F1EB49405F0F1A7BFB326DC0F844D;
 			remoteInfo = Screenshots;
 		};
-		B34BBE13AD65F422572748CEB0B3F013 /* PBXContainerItemProxy */ = {
+		F4FB6C934F037D96DB80A48DA77F0BA3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -42,53 +44,55 @@
 		053156983C493DA760B79BBF315BFD21 /* Pods_Screenshots_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Screenshots_Tests.framework; path = "Pods-Screenshots_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A3FEFCA7C98EECC85FB4254CD86EA3F /* Pods-Screenshots_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Screenshots_Tests-umbrella.h"; sourceTree = "<group>"; };
 		0A46D84615ED099186C547C7C026B644 /* Pods-Screenshots_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Screenshots_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		1ABC93DE50EC4E669A1FF1BE32966C03 /* Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Screenshots.debug.xcconfig; sourceTree = "<group>"; };
+		1487CBAA2B0BE59F8162ABF7FD967BF0 /* Screenshots.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Screenshots.modulemap; sourceTree = "<group>"; };
+		15BA1E74CA61E3443FD8BFFFB0F87584 /* Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Screenshots.release.xcconfig; sourceTree = "<group>"; };
+		1EC45D645B26FE95E60A648A9B404F86 /* Screenshots-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Screenshots-prefix.pch"; sourceTree = "<group>"; };
 		24BC379573121137E4F89DC5C14908D6 /* Pods-Screenshots_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Screenshots_Example-dummy.m"; sourceTree = "<group>"; };
-		3A6E33B7FADB091DDF70C842E672E0EA /* Screenshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Screenshot.swift; path = Screenshots/Classes/Screenshot.swift; sourceTree = "<group>"; };
-		3CCC8B0D3B5C73653033F78DD618556F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		2EFB082F911EF64DDBCFF9790ED03819 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		3CC6FD4CBEFBE3FB09422D43E67A6C4B /* Screenshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Screenshot.swift; path = Screenshots/Classes/Screenshot.swift; sourceTree = "<group>"; };
+		48D45CA0B5603FE8752342BCF4C02D78 /* Screenshots-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Screenshots-umbrella.h"; sourceTree = "<group>"; };
 		48FB644626909DDDCC86AF48C3C6A3EF /* Pods_Screenshots_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Screenshots_Example.framework; path = "Pods-Screenshots_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4970AD87385E4FEEE4766CECC9E1FB64 /* Pods-Screenshots_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Screenshots_Tests.modulemap"; sourceTree = "<group>"; };
 		4E3D4AADA9AB4DD69EF9D5351B59A015 /* Pods-Screenshots_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Screenshots_Tests-dummy.m"; sourceTree = "<group>"; };
+		4EA7B5E73F3168304473F37B243D3EA3 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		52788F68ED35F81E9E018FB42FED1BA4 /* Pods-Screenshots_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Screenshots_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		5C3A42197A4F2208AE8648154D999240 /* Pods-Screenshots_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Screenshots_Tests-Info.plist"; sourceTree = "<group>"; };
-		6A87B1CFE6688B19A80586A0502BA996 /* Screenshots-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Screenshots-prefix.pch"; sourceTree = "<group>"; };
-		70A901424F8697205B429D87B3589894 /* Screenshots-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Screenshots-dummy.m"; sourceTree = "<group>"; };
+		5FB80A31EBD778F2EEAF976341F2EB99 /* Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Screenshots.debug.xcconfig; sourceTree = "<group>"; };
+		68E583F9B4917199DA3AEBEDFEEAB189 /* Screenshots.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = Screenshots.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		76D2C14889B78C8BEBF4DAB634214A3D /* Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Screenshots.framework; path = Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D2255DCB9D4EC72BAEAD82ED8ED5719 /* Pods-Screenshots_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Screenshots_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8165A17D7DD93A58A3128468F56E4EB9 /* Pods-Screenshots_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Screenshots_Example-Info.plist"; sourceTree = "<group>"; };
-		84BF0BEB9129C431D4139107639A4ECA /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		81BD51183A363E3D9DE69D7625CE798A /* Screenshots-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Screenshots-Info.plist"; sourceTree = "<group>"; };
 		9220CC99FE7D7EFD71613C6CAA1E9B36 /* Pods-Screenshots_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Screenshots_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		9285CD92B274B54AC54099300823BF06 /* Pods-Screenshots_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Screenshots_Example.modulemap"; sourceTree = "<group>"; };
-		9A9625F58B95F0A8C760D6EA8F4DD25F /* Screenshots.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = Screenshots.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		946F3E8035C5F6BFC31A57DC82DE1A14 /* ScreenshotError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScreenshotError.swift; path = Screenshots/Classes/ScreenshotError.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9F5C9F67CB5D412624CE6A5AB6D85563 /* StringExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StringExtension.swift; path = Screenshots/Classes/StringExtension.swift; sourceTree = "<group>"; };
+		A180AA9828AE797B91A649108C013E35 /* ScreenshotCLI.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScreenshotCLI.swift; path = Screenshots/Classes/ScreenshotCLI.swift; sourceTree = "<group>"; };
 		B5509A2F094BFF8EEEDC5329CAB6AC92 /* Pods-Screenshots_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Screenshots_Example-frameworks.sh"; sourceTree = "<group>"; };
-		B7D3ADCC5A1608B03C9866FE41B942FB /* Screenshots-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Screenshots-umbrella.h"; sourceTree = "<group>"; };
 		BF3452684FFAB3642CB7A8A9CB11EB0F /* Pods-Screenshots_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Screenshots_Example-umbrella.h"; sourceTree = "<group>"; };
 		C084092844BFB5227670D994DBA90A39 /* Pods-Screenshots_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Screenshots_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		C1430F003D39D9906881A6AC724B7931 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		C4B3F6909F8275FDB679DC258E21B37E /* Screenshots-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Screenshots-Info.plist"; sourceTree = "<group>"; };
-		DA48A79E33715012CBC5B0153CADB0BB /* Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Screenshots.release.xcconfig; sourceTree = "<group>"; };
-		DFDC42C1638E79E11CE729E87A5FA3D3 /* Screenshots.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Screenshots.modulemap; sourceTree = "<group>"; };
+		C8A1E70D0103B81B8F27C330F556E477 /* Screenshots-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Screenshots-dummy.m"; sourceTree = "<group>"; };
 		ECBE456E40EB84AC96EF3FDA61309E21 /* Pods-Screenshots_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Screenshots_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		EE9EABBF1A809B3F7A8A83408480875F /* Pods-Screenshots_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Screenshots_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		F5E7086D4E11A9A59AA1F4323C645650 /* StringExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StringExtension.swift; path = Screenshots/Classes/StringExtension.swift; sourceTree = "<group>"; };
 		F6157E1A2BA7C80B8BF9847726B0C1EB /* Pods-Screenshots_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Screenshots_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		74E6F04557F6506F848FEA0BFAD3E2F1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5B9255ED813D49FD48D17B1656B86842 /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9F39FF920A831AD27AC7BD7AD176A307 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7AA9E18C2D6D50639060DF43138C6F27 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A78CC04E78DC8A6052A77CF096D9CE03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5FB2069A30CD77BF077E017B012A7B4 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,31 +107,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B15973AE120A05C42353926E67FCC3C /* Screenshots */ = {
+		1FF9E7111EA51A690B2B451F2747FC8D /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
-				3A6E33B7FADB091DDF70C842E672E0EA /* Screenshot.swift */,
-				9F5C9F67CB5D412624CE6A5AB6D85563 /* StringExtension.swift */,
-				8247D287CC38D92F3FE32A2EF443C649 /* Pod */,
-				1A1F2818A0C00FFF9ABC71950522EC02 /* Support Files */,
+				3CC6FD4CBEFBE3FB09422D43E67A6C4B /* Screenshot.swift */,
+				A180AA9828AE797B91A649108C013E35 /* ScreenshotCLI.swift */,
+				946F3E8035C5F6BFC31A57DC82DE1A14 /* ScreenshotError.swift */,
+				F5E7086D4E11A9A59AA1F4323C645650 /* StringExtension.swift */,
+				283AC70862E0565741E31728B6B92564 /* Pod */,
+				F2E196A72912E71C84C151B66206EFC7 /* Support Files */,
 			);
 			name = Screenshots;
 			path = ../..;
-			sourceTree = "<group>";
-		};
-		1A1F2818A0C00FFF9ABC71950522EC02 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				DFDC42C1638E79E11CE729E87A5FA3D3 /* Screenshots.modulemap */,
-				70A901424F8697205B429D87B3589894 /* Screenshots-dummy.m */,
-				C4B3F6909F8275FDB679DC258E21B37E /* Screenshots-Info.plist */,
-				6A87B1CFE6688B19A80586A0502BA996 /* Screenshots-prefix.pch */,
-				B7D3ADCC5A1608B03C9866FE41B942FB /* Screenshots-umbrella.h */,
-				1ABC93DE50EC4E669A1FF1BE32966C03 /* Screenshots.debug.xcconfig */,
-				DA48A79E33715012CBC5B0153CADB0BB /* Screenshots.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/Screenshots";
 			sourceTree = "<group>";
 		};
 		26ED10563B37E703C49AF390428B33DB /* Pods-Screenshots_Tests */ = {
@@ -147,12 +138,12 @@
 			path = "Target Support Files/Pods-Screenshots_Tests";
 			sourceTree = "<group>";
 		};
-		8247D287CC38D92F3FE32A2EF443C649 /* Pod */ = {
+		283AC70862E0565741E31728B6B92564 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				84BF0BEB9129C431D4139107639A4ECA /* LICENSE */,
-				3CCC8B0D3B5C73653033F78DD618556F /* README.md */,
-				9A9625F58B95F0A8C760D6EA8F4DD25F /* Screenshots.podspec */,
+				4EA7B5E73F3168304473F37B243D3EA3 /* LICENSE */,
+				2EFB082F911EF64DDBCFF9790ED03819 /* README.md */,
+				68E583F9B4917199DA3AEBEDFEEAB189 /* Screenshots.podspec */,
 			);
 			name = Pod;
 			sourceTree = "<group>";
@@ -164,14 +155,6 @@
 				26ED10563B37E703C49AF390428B33DB /* Pods-Screenshots_Tests */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		98218DC5131B60E88D3AAD71F75CC0A5 /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				0B15973AE120A05C42353926E67FCC3C /* Screenshots */,
-			);
-			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		997F9D2EAB77DB0DD918F396CF6452C6 /* Products */ = {
@@ -188,7 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				98218DC5131B60E88D3AAD71F75CC0A5 /* Development Pods */,
+				F481531F1DDE70C1C1EEF738E489EC3C /* Development Pods */,
 				E0A1E60606E0BF6E2E10F1F01350DFE8 /* Frameworks */,
 				997F9D2EAB77DB0DD918F396CF6452C6 /* Products */,
 				91DF49DC8811740F966BF14E81EB0C97 /* Targets Support Files */,
@@ -228,6 +211,29 @@
 			name = "OS X";
 			sourceTree = "<group>";
 		};
+		F2E196A72912E71C84C151B66206EFC7 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1487CBAA2B0BE59F8162ABF7FD967BF0 /* Screenshots.modulemap */,
+				C8A1E70D0103B81B8F27C330F556E477 /* Screenshots-dummy.m */,
+				81BD51183A363E3D9DE69D7625CE798A /* Screenshots-Info.plist */,
+				1EC45D645B26FE95E60A648A9B404F86 /* Screenshots-prefix.pch */,
+				48D45CA0B5603FE8752342BCF4C02D78 /* Screenshots-umbrella.h */,
+				5FB80A31EBD778F2EEAF976341F2EB99 /* Screenshots.debug.xcconfig */,
+				15BA1E74CA61E3443FD8BFFFB0F87584 /* Screenshots.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/Screenshots";
+			sourceTree = "<group>";
+		};
+		F481531F1DDE70C1C1EEF738E489EC3C /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1FF9E7111EA51A690B2B451F2747FC8D /* Screenshots */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -247,11 +253,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE1AFB90C55F7C7716EF7F593C527B09 /* Headers */ = {
+		76BB495D9D11A6C69E147FFE69DDE6D3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEC51511C45313C4D60D3B8FD4E012A1 /* Screenshots-umbrella.h in Headers */,
+				AEACCD908BCA51B164E96C61F82654D9 /* Screenshots-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +276,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				34C21F09EDC02B648BF8036215C48EF3 /* PBXTargetDependency */,
+				F9DCDD6E8B16CD7C3D3108239FDE6972 /* PBXTargetDependency */,
 			);
 			name = "Pods-Screenshots_Example";
 			productName = "Pods-Screenshots_Example";
@@ -279,12 +285,12 @@
 		};
 		3A0F1EB49405F0F1A7BFB326DC0F844D /* Screenshots */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EA46BA949455097D9F95A9C28782679B /* Build configuration list for PBXNativeTarget "Screenshots" */;
+			buildConfigurationList = F10595CD29C756A0998DB65172E8241C /* Build configuration list for PBXNativeTarget "Screenshots" */;
 			buildPhases = (
-				CE1AFB90C55F7C7716EF7F593C527B09 /* Headers */,
-				529AB20A9316EC90D5FDB228F8FD0F6D /* Sources */,
-				74E6F04557F6506F848FEA0BFAD3E2F1 /* Frameworks */,
-				90E0D187DB21DB2F45023A067DBB41C0 /* Resources */,
+				76BB495D9D11A6C69E147FFE69DDE6D3 /* Headers */,
+				EAB46592A848BA303EDDFB611E70D995 /* Sources */,
+				A78CC04E78DC8A6052A77CF096D9CE03 /* Frameworks */,
+				1813E8773516E765A0F95F07873B25D7 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -307,7 +313,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				FCF92B0769EA3F9FFA1D4438B69BE881 /* PBXTargetDependency */,
+				438BB21B3946BE3C9F791EB2AB796FFD /* PBXTargetDependency */,
 			);
 			name = "Pods-Screenshots_Tests";
 			productName = "Pods-Screenshots_Tests";
@@ -344,6 +350,13 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1813E8773516E765A0F95F07873B25D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		233BB0E654E009318BBA412F994EF3C0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -352,13 +365,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		5FB0280E9741D047BE367E5211D26698 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		90E0D187DB21DB2F45023A067DBB41C0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -376,16 +382,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		529AB20A9316EC90D5FDB228F8FD0F6D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				127EA9E0862AB32C0CCFA7632179438E /* Screenshot.swift in Sources */,
-				7F44DE4CDAF793689303B650EE7E2E1D /* Screenshots-dummy.m in Sources */,
-				4FBFEEB7B3B06DD17E19F0186A440CEE /* StringExtension.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9A51EC31CD1EC7E974D30F2E41A7FA72 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -394,20 +390,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EAB46592A848BA303EDDFB611E70D995 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D0F162DC3B8519A6DCBA13E9E512587 /* Screenshot.swift in Sources */,
+				7B8116297ED33AA14C831B1460431BA4 /* ScreenshotCLI.swift in Sources */,
+				C85AE9806EE21B3F1C7D92AF288A9EEF /* ScreenshotError.swift in Sources */,
+				7F9295BA12BD92A07A1EAFFD3C4A6F89 /* Screenshots-dummy.m in Sources */,
+				B8BCBD5BD11C3BF201F2A29960130345 /* StringExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		34C21F09EDC02B648BF8036215C48EF3 /* PBXTargetDependency */ = {
+		438BB21B3946BE3C9F791EB2AB796FFD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Screenshots;
 			target = 3A0F1EB49405F0F1A7BFB326DC0F844D /* Screenshots */;
-			targetProxy = 92738E4172491B15FA545880005011B7 /* PBXContainerItemProxy */;
+			targetProxy = F4FB6C934F037D96DB80A48DA77F0BA3 /* PBXContainerItemProxy */;
 		};
-		FCF92B0769EA3F9FFA1D4438B69BE881 /* PBXTargetDependency */ = {
+		F9DCDD6E8B16CD7C3D3108239FDE6972 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Screenshots;
 			target = 3A0F1EB49405F0F1A7BFB326DC0F844D /* Screenshots */;
-			targetProxy = B34BBE13AD65F422572748CEB0B3F013 /* PBXContainerItemProxy */;
+			targetProxy = 152CCF1FA33E7B65547ADB3D32705A19 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -480,6 +488,70 @@
 			};
 			name = Release;
 		};
+		21BA9BBF5E9E92DDB8C862C1545538C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5FB80A31EBD778F2EEAF976341F2EB99 /* Screenshots.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Screenshots/Screenshots-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Screenshots/Screenshots-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MODULEMAP_FILE = "Target Support Files/Screenshots/Screenshots.modulemap";
+				PRODUCT_MODULE_NAME = Screenshots;
+				PRODUCT_NAME = Screenshots;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		232F440C8C2B0DBE6104B4FCDA8E7611 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15BA1E74CA61E3443FD8BFFFB0F87584 /* Screenshots.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Screenshots/Screenshots-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Screenshots/Screenshots-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MODULEMAP_FILE = "Target Support Files/Screenshots/Screenshots.modulemap";
+				PRODUCT_MODULE_NAME = Screenshots;
+				PRODUCT_NAME = Screenshots;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		2829878FB863BDF4FA9DCAE47D366556 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 52788F68ED35F81E9E018FB42FED1BA4 /* Pods-Screenshots_Tests.debug.xcconfig */;
@@ -509,38 +581,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		5782A1D83C55F2C78C1FF21BBAF40888 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1ABC93DE50EC4E669A1FF1BE32966C03 /* Screenshots.debug.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Screenshots/Screenshots-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Screenshots/Screenshots-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MODULEMAP_FILE = "Target Support Files/Screenshots/Screenshots.modulemap";
-				PRODUCT_MODULE_NAME = Screenshots;
-				PRODUCT_NAME = Screenshots;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -611,38 +651,6 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
-		};
-		ADB776F3EB38433DC9073F3F06CD945A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA48A79E33715012CBC5B0153CADB0BB /* Screenshots.release.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Screenshots/Screenshots-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Screenshots/Screenshots-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MODULEMAP_FILE = "Target Support Files/Screenshots/Screenshots.modulemap";
-				PRODUCT_MODULE_NAME = Screenshots;
-				PRODUCT_NAME = Screenshots;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		C0AB89DB0533D8E2B9201FA6579824B7 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -770,11 +778,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EA46BA949455097D9F95A9C28782679B /* Build configuration list for PBXNativeTarget "Screenshots" */ = {
+		F10595CD29C756A0998DB65172E8241C /* Build configuration list for PBXNativeTarget "Screenshots" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5782A1D83C55F2C78C1FF21BBAF40888 /* Debug */,
-				ADB776F3EB38433DC9073F3F06CD945A /* Release */,
+				21BA9BBF5E9E92DDB8C862C1545538C0 /* Debug */,
+				232F440C8C2B0DBE6104B4FCDA8E7611 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
