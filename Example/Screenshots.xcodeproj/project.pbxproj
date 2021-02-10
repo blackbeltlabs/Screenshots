@@ -295,12 +295,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Screenshots_Tests/Pods-Screenshots_Tests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Screenshots/Screenshots.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftDirectoryWatcher/SwiftDirectoryWatcher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Screenshots.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDirectoryWatcher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -315,12 +313,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Screenshots_Example/Pods-Screenshots_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Screenshots/Screenshots.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftDirectoryWatcher/SwiftDirectoryWatcher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Screenshots.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDirectoryWatcher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

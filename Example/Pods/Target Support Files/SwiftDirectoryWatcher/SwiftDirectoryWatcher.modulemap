@@ -1,6 +1,0 @@
-framework module SwiftDirectoryWatcher {
-  umbrella header "SwiftDirectoryWatcher-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -2,12 +2,8 @@ use_frameworks!
 
 target 'Screenshots_Example' do
   pod 'Screenshots', :path => '../'
-  pod 'SwiftDirectoryWatcher', :path => '../SwiftDirectoryWatcher/'
-
 end
 
 target 'Screenshots_Tests' do
   pod 'Screenshots', :path => '../'
-  pod 'SwiftDirectoryWatcher', :path => '../SwiftDirectoryWatcher/'
-
 end

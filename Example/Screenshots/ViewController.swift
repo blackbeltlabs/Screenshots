@@ -16,18 +16,12 @@ class ViewController: NSViewController {
   @IBOutlet weak var soundEnabledField: NSButton!
   
   lazy var cliScreenshots = ScreenshotCLI()
-  lazy var systemScreenshots = SystemScreenshotWatcher()
+ // lazy var systemScreenshots = SystemScreenshotWatcher()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    systemScreenshots.delegate = self
-    systemScreenshots.start()
-    
-    cliScreenshots.delegate = self
+
     cliScreenshots.taskDelegate = self
-    cliScreenshots.start()
-    
     cliScreenshots.soundEnabled = soundEnabledField.state == .on
   }
 
@@ -63,26 +57,6 @@ class ViewController: NSViewController {
     }
   }
   
-}
-
-extension ViewController: ScreenshotWatcherDelegate {
-  func screenshotWatcher(_ watcher: ScreenshotWatcher, didCapture screenshot: Screenshot) {
-    if let error = screenshot.error {
-      switch error {
-      case .invalidImage: textField.stringValue = "Error: Failed reading screenshot"
-      case .missingMetadataRectProperty:
-        textField.stringValue = "Error: Failed reading screenshot coordinates"
-        let image = NSImage(byReferencing: screenshot.url)
-        imageView.image = image
-      }
-      
-      return
-    }
-    
-    textField.stringValue = "Success rect: \(screenshot.rect!), retries: \(screenshot.retries)"
-    let image = NSImage(byReferencing: screenshot.url)
-    imageView.image = image
-  }
 }
 
 extension ViewController: ScreenshotTaskDelegate {

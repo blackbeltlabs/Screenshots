@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary          = 'Create screenshots on macOS via the screencapture CLI.'
 
   s.description      = <<-DESC
-This lib allows you to create screenshots includin screen coordinates via the screencapture CLI.
+This lib allows you to create screenshots including screen coordinates via the screencapture CLI.
 It also supports watching Desktop for any system screenshots.
                        DESC
 
@@ -18,5 +18,4 @@ It also supports watching Desktop for any system screenshots.
   s.osx.deployment_target = "10.13"
   s.swift_version = "5.0"
   s.source_files = 'Screenshots/Classes/**/*'
-  s.dependency 'SwiftDirectoryWatcher', '0.0.8'
 end
