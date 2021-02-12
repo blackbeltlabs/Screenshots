@@ -30,7 +30,8 @@ class ViewController: NSViewController {
   }
 
   @IBAction func didTapCreateScreenshot(sender: Any) {
-    cliScreenshots.createScreenshot { (result) in
+    cliScreenshots.createScreenshot { [weak self] (result) in
+      guard let self = self else { return }
       switch result {
       case .success(let screenshot):
         DispatchQueue.main.async {
