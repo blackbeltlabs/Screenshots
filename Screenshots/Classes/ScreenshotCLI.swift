@@ -49,14 +49,9 @@ public class ScreenshotCLI {
       
       task.arguments = [args, url.path]
       task.qualityOfService = .userInteractive
-      
-      //self.task = task
-      
+            
       task.launch()
       task.waitUntilExit()
-      
-    
-     // self.task = nil
       
       if task.terminationStatus != 0 {
         print("Error: task.terminationStatus != 0")
