@@ -14,6 +14,7 @@ class ViewController: NSViewController {
   @IBOutlet var imageView: NSImageView!
   @IBOutlet var textField: NSTextField!
   @IBOutlet weak var soundEnabledField: NSButton!
+  @IBOutlet weak var windowShadowEnabledField: NSButton!
   
   lazy var cliScreenshots = ScreenshotCLI()
   
@@ -47,6 +48,10 @@ class ViewController: NSViewController {
   
   @IBAction func soundEnabledPressed(_ sender: Any) {
     cliScreenshots.soundEnabled = soundEnabledField.state == .on
+  }
+  
+  @IBAction func windowShadowEnabledPressed(_ sender: Any) {
+    cliScreenshots.windowShadowEnabled = windowShadowEnabledField.state == .on
   }
   
   @IBAction func captureWindowPressed(_ sender: Any) {

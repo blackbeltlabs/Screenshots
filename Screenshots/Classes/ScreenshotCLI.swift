@@ -7,6 +7,7 @@ public class ScreenshotCLI {
   // MARK: - Screenshot parameters
   
   public var soundEnabled: Bool = true
+  public var windowShadowEnabled: Bool = true
   
   public init() {
     
@@ -84,6 +85,7 @@ public class ScreenshotCLI {
     }
     
     let soundEnabled = self.soundEnabled
+    let windowShadowEnabled = self.windowShadowEnabled
     
       DispatchQueue.global(qos: .userInteractive).async {
         let task = Process()
@@ -92,6 +94,10 @@ public class ScreenshotCLI {
         
         if !soundEnabled {
           args.append("x")
+        }
+        
+        if !windowShadowEnabled {
+          args.append("o")
         }
       
         task.arguments = [args, url.path]
