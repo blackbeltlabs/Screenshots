@@ -752,6 +752,16 @@
                                     <action selector="captureWindowPressed:" target="XfG-lQ-9wD" id="7DB-h9-F5e"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EA5-nh-fbT">
+                                <rect key="frame" x="346" y="39" width="125" height="18"/>
+                                <buttonCell key="cell" type="check" title="Window shadow" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="4m1-5R-4OE">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="windowShadowEnabledPressed:" target="XfG-lQ-9wD" id="Z4Z-ZV-6a4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="bHh-9L-2hp" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="14" id="1BH-iQ-aD9"/>
@@ -761,6 +771,8 @@
                             <constraint firstItem="ZfK-AB-imd" firstAttribute="top" secondItem="Srk-J0-g5K" secondAttribute="bottom" constant="10" id="9Ek-F5-oya"/>
                             <constraint firstAttribute="trailing" secondItem="toi-UU-OIU" secondAttribute="trailing" constant="9" id="BRF-vW-Su6"/>
                             <constraint firstItem="ZfK-AB-imd" firstAttribute="centerX" secondItem="FoD-a0-Pkp" secondAttribute="centerX" id="F0G-wy-MoS"/>
+                            <constraint firstItem="toi-UU-OIU" firstAttribute="top" secondItem="EA5-nh-fbT" secondAttribute="bottom" constant="12" id="Iur-jG-quS"/>
+                            <constraint firstItem="EA5-nh-fbT" firstAttribute="trailing" secondItem="toi-UU-OIU" secondAttribute="trailing" id="O3t-w9-ZZr"/>
                             <constraint firstItem="Srk-J0-g5K" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="Tib-5S-q6G"/>
                             <constraint firstItem="toi-UU-OIU" firstAttribute="centerY" secondItem="FoD-a0-Pkp" secondAttribute="centerY" id="bQE-nM-99w"/>
                             <constraint firstItem="FoD-a0-Pkp" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="eJg-MV-M8P"/>
@@ -772,6 +784,7 @@
                         <outlet property="imageView" destination="Srk-J0-g5K" id="eGU-up-z5M"/>
                         <outlet property="soundEnabledField" destination="toi-UU-OIU" id="Tmd-Gd-NlX"/>
                         <outlet property="textField" destination="ZfK-AB-imd" id="Xhr-aA-A4a"/>
+                        <outlet property="windowShadowEnabledField" destination="EA5-nh-fbT" id="JvG-SE-IH0"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
