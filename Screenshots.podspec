@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Screenshots'
-  s.version          = '0.3.3'
+  s.version          = '0.4.0'
   s.summary          = 'Create screenshots on macOS via the screencapture CLI.'
 
   s.description      = <<-DESC
