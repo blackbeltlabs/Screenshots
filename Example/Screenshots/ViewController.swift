@@ -16,6 +16,11 @@ class ViewController: NSViewController {
   @IBOutlet weak var soundEnabledField: NSButton!
   @IBOutlet weak var windowShadowEnabledField: NSButton!
   
+  @IBOutlet weak var xTextField: NSTextField!
+  @IBOutlet weak var yTextField: NSTextField!
+  @IBOutlet weak var widthTextField: NSTextField!
+  @IBOutlet weak var heightTextField: NSTextField!
+  
   lazy var cliScreenshots = ScreenshotCLI()
   
   override func viewDidLoad() {
@@ -29,9 +34,33 @@ class ViewController: NSViewController {
     // Update the view, if already loaded.
     }
   }
-
+  
+  // MARK: - Actions
+  
   @IBAction func didTapCreateScreenshot(sender: Any) {
-    cliScreenshots.createScreenshot { [weak self] (result) in
+    let screenshotRect: CGRect?
+    
+    if let x = Int(xTextField.stringValue),
+       let y = Int(yTextField.stringValue),
+       let width = Int(widthTextField.stringValue),
+       let height = Int(heightTextField.stringValue){
+      screenshotRect = CGRect(x: x,
+                              y: y,
+                              width: width,
+                              height: height)
+    } else {
+      screenshotRect = nil
+    }
+    
+    let params: ScreenshotParams?
+    
+    if let screenshotRect = screenshotRect {
+      params = ScreenshotParams(selectionRect: screenshotRect)
+    } else {
+      params = nil
+    }
+    
+    cliScreenshots.createScreenshot(params: params) { [weak self ](result) in
       guard let self = self else { return }
       switch result {
       case .success(let screenshot):
