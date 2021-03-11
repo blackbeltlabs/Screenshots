@@ -55,8 +55,8 @@ public class ScreenshotCLI {
         args.append(String(format: "R%d,%d,%d,%d",
                            Int(rect.origin.x),
                            Int(rect.origin.y),
-                               Int(rect.size.width),
-                                   Int(rect.size.height)))
+                           Int(rect.size.width),
+                           Int(rect.size.height)))
       } else {
         args.append("s")
       }

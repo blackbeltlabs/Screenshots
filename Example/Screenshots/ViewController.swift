@@ -43,7 +43,7 @@ class ViewController: NSViewController {
     if let x = Int(xTextField.stringValue),
        let y = Int(yTextField.stringValue),
        let width = Int(widthTextField.stringValue),
-       let height = Int(heightTextField.stringValue){
+       let height = Int(heightTextField.stringValue) {
       screenshotRect = CGRect(x: x,
                               y: y,
                               width: width,
