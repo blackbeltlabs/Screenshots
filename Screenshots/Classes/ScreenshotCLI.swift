@@ -25,7 +25,8 @@ public class ScreenshotCLI {
       .appendingPathExtension("png")
   }
   
-  public func createScreenshot(completion: @escaping (Result<Screenshot, Error>) -> Void) {
+  public func createScreenshot(params: ScreenshotParams? = nil,
+                               completion: @escaping (Result<Screenshot, Error>) -> Void) {
     guard let url = createScreenshotURL() else {
       completion(.failure(ScreenshotError.screenshotDirectoryIsInvalid))
       return
@@ -41,11 +42,23 @@ public class ScreenshotCLI {
       task.standardOutput = pipe
       
       task.launchPath = "/usr/sbin/screencapture"
-      
-      var args: String = "-s"
+    
+      var args = "-"
       
       if !soundEnabled {
-        args.append("x")
+        if !soundEnabled {
+          args.append("x")
+        }
+      }
+    
+      if let rect = params?.selectionRect {
+        args.append(String(format: "R%d,%d,%d,%d",
+                           Int(rect.origin.x),
+                           Int(rect.origin.y),
+                           Int(rect.size.width),
+                           Int(rect.size.height)))
+      } else {
+        args.append("s")
       }
       
       task.arguments = [args, url.path]

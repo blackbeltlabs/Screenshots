@@ -1,5 +1,5 @@
 PODS:
-  - Screenshots (0.3.3)
+  - Screenshots (0.4.0)
 
 DEPENDENCIES:
   - Screenshots (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Screenshots: 3c7599d6fa6408d4747b20815fadb631cd082219
+  Screenshots: 42c9662e99add5df6c5fdf52c3d83d2e3e6d131a
 
 PODFILE CHECKSUM: 0324bfdd26f6a2c4a3bf31bc65444e20758e029d
 
