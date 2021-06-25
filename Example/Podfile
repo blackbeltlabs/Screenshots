@@ -1,9 +1,9 @@
 use_frameworks!
 
 target 'Screenshots_Example' do
-  pod 'Screenshots', :path => '../'
+  #pod 'Screenshots', :path => '../'
 end
 
 target 'Screenshots_Tests' do
-  pod 'Screenshots', :path => '../'
+  #pod 'Screenshots', :path => '../'
 end

@@ -20,6 +20,6 @@
     "osx": "10.13"
   },
   "swift_versions": "5.0",
-  "source_files": "Screenshots/Classes/**/*",
+  "source_files": "Sources/Classes/**/*",
   "swift_version": "5.0"
 }

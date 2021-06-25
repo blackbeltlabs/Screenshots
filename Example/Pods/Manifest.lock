@@ -1,16 +1,3 @@
-PODS:
-  - Screenshots (0.4.0)
-
-DEPENDENCIES:
-  - Screenshots (from `../`)
-
-EXTERNAL SOURCES:
-  Screenshots:
-    :path: "../"
-
-SPEC CHECKSUMS:
-  Screenshots: 42c9662e99add5df6c5fdf52c3d83d2e3e6d131a
-
-PODFILE CHECKSUM: 0324bfdd26f6a2c4a3bf31bc65444e20758e029d
+PODFILE CHECKSUM: e00973988ce4515c3b535aadc695d163a0f6b19a
 
 COCOAPODS: 1.10.1

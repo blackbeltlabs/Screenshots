@@ -17,5 +17,5 @@ It also supports watching Desktop for any system screenshots.
   s.platform = :osx
   s.osx.deployment_target = "10.13"
   s.swift_version = "5.0"
-  s.source_files = 'Screenshots/Classes/**/*'
+  s.source_files = 'Sources/Screenshots/**/*'
 end
