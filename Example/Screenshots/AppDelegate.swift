@@ -1,12 +1,5 @@
-//
-//  AppDelegate.swift
-//  Screenshots
-//
-//  Created by Mirko Kiefer on 02/24/2019.
-//  Copyright (c) 2019 Mirko Kiefer. All rights reserved.
-//
-
 import Cocoa
+import Screenshots
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -14,6 +7,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
+    ScreenshotCLI.requestNeededPermissions()
     // Insert code here to initialize your application
   }
 

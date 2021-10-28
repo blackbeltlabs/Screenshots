@@ -13,6 +13,15 @@ public class ScreenshotCLI {
     
   }
   
+  static public func requestNeededPermissions() {
+    let mouseEventsHandler = MouseEventsHandler()
+    try? mouseEventsHandler.startListening { _ in
+    }
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+      mouseEventsHandler.stopListening()
+    }
+  }
+  
   func createScreenshotURL() -> URL? {
     return screenshotDirectory?
       .appendingPathComponent("Screen Shot " + UUID().uuidString)
