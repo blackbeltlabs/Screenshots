@@ -42,7 +42,8 @@ public class ScreenshotCLI {
     
     let soundEnabled = self.soundEnabled
     
-    DispatchQueue.global(qos: .userInteractive).async { 
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      guard let self = self else { return }
       
       let pipe = Pipe()
       let task = Process()
@@ -95,11 +96,32 @@ public class ScreenshotCLI {
           return
         }
         
-       // let attributes = self.getAttributes(for: url)
-       
+        self.handleSuccessfulScreenshotCapture(url: url,
+                                               rect: params?.selectionRect,
+                                               screenshotRectHandler: screenshotRectHandler,
+                                               completion: completion)
+      }
+    }
+  }
+  
+  private func handleSuccessfulScreenshotCapture(url: URL,
+                                                 rect: CGRect?,
+                                                 screenshotRectHandler: ScreenshotRectHandler,
+                                                 completion: @escaping (Result<Screenshot, Error>) -> Void) {
+    if let rect = rect {
+      DispatchQueue.main.async {
+        completion(.success(.init(url: url, rect: rect.integral)))
+      }
+    } else {
+      if #available(macOS 12.0, *) {
         DispatchQueue.main.async {
           let rect = screenshotRectHandler.screenshotRect()
-          completion(.success(.init(url: url, rect: rect)))
+          completion(.success(.init(url: url, rect: rect?.integral)))
+        }
+      } else {
+        let attributes = self.getAttributes(for: url)
+        DispatchQueue.main.async {
+          completion(.success(.init(url: url, rect: attributes?.integral)))
         }
       }
     }
