@@ -14,11 +14,10 @@ public class ScreenshotCLI {
   }
   
   static public func requestNeededPermissions() {
-    let mouseEventsHandler = MouseEventsHandler()
-    try? mouseEventsHandler.startListening { _ in
-    }
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-      mouseEventsHandler.stopListening()
+    if #available(macOS 10.15, *) {
+      if IOHIDCheckAccess(kIOHIDRequestTypeListenEvent) == kIOHIDAccessTypeUnknown {
+        IOHIDRequestAccess(kIOHIDRequestTypeListenEvent)
+      }
     }
   }
   
