@@ -15,9 +15,6 @@ final class ScreenshotRectHandler {
           self.mouseDownLocation = result.locationInScreen
         case .leftMouseUp:
           self.mouseUpLocation = result.locationInScreen
-          if self.mouseDownLocation != nil {
-            self.mouseEventsHandler.stopListening()
-          }
         }
       }
     } catch let error {
