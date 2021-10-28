@@ -3,6 +3,9 @@ import Foundation
 enum MouseEventType {
   case leftMouseUp
   case leftMouseDown
+  
+  case rightMouseUp
+  case rightMouseDown
 }
 
 struct MouseEventsResult {
@@ -38,7 +41,7 @@ class MouseEventsHandler {
   func startListening(listeningCallback: @escaping (MouseEventsResult) -> Void) throws {
     stopListening()
     
-    let eventMask = (1 << CGEventType.leftMouseDown.rawValue) | (1 << CGEventType.leftMouseUp.rawValue)
+    let eventMask = (1 << CGEventType.leftMouseDown.rawValue) | (1 << CGEventType.leftMouseUp.rawValue) | (1 << CGEventType.rightMouseDown.rawValue) | (1 << CGEventType.rightMouseUp.rawValue)
     
     // need this trick to extract `self` later in C-function where we can't pass it directly
     let mySelf = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
@@ -97,6 +100,12 @@ class MouseEventsHandler {
                               locationInScreen: data.event.location))
     case .leftMouseUp:
       listeningCallback(.init(eventType: .leftMouseUp,
+                              locationInScreen: data.event.location))
+    case .rightMouseUp:
+      listeningCallback(.init(eventType: .rightMouseUp,
+                              locationInScreen: data.event.location))
+    case .rightMouseDown:
+      listeningCallback(.init(eventType: .rightMouseDown,
                               locationInScreen: data.event.location))
     default:
       break

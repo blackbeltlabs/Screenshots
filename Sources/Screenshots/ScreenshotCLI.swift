@@ -42,8 +42,7 @@ public class ScreenshotCLI {
     
     let soundEnabled = self.soundEnabled
     
-    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-      guard let self = self else { return }
+    DispatchQueue.global(qos: .userInteractive).async { 
       
       let pipe = Pipe()
       let task = Process()

@@ -11,9 +11,9 @@ final class ScreenshotRectHandler {
       try mouseEventsHandler.startListening { [weak self] result in
         guard let self = self else { return }
         switch result.eventType {
-        case .leftMouseDown:
+        case .leftMouseDown, .rightMouseDown:
           self.mouseDownLocation = result.locationInScreen
-        case .leftMouseUp:
+        case .leftMouseUp, .rightMouseUp:
           self.mouseUpLocation = result.locationInScreen
         }
       }
