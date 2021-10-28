@@ -13,6 +13,14 @@ public class ScreenshotCLI {
     
   }
   
+  static public func requestNeededPermissions() {
+    if #available(macOS 10.15, *) {
+      if IOHIDCheckAccess(kIOHIDRequestTypeListenEvent) == kIOHIDAccessTypeUnknown {
+        IOHIDRequestAccess(kIOHIDRequestTypeListenEvent)
+      }
+    }
+  }
+  
   func createScreenshotURL() -> URL? {
     return screenshotDirectory?
       .appendingPathComponent("Screen Shot " + UUID().uuidString)
@@ -63,7 +71,14 @@ public class ScreenshotCLI {
       
       task.arguments = [args, url.path]
       task.qualityOfService = .userInteractive
-            
+       
+      let screenshotRectHandler = ScreenshotRectHandler()
+      if #available(macOS 12.0, *) {
+        DispatchQueue.main.async {
+          screenshotRectHandler.startEventsMonitor()
+        }
+      }
+    
       task.launch()
       task.waitUntilExit()
       
@@ -82,12 +97,36 @@ public class ScreenshotCLI {
           return
         }
         
+        self.handleSuccessfulScreenshotCapture(url: url,
+                                               rect: params?.selectionRect,
+                                               screenshotRectHandler: screenshotRectHandler,
+                                               completion: completion)
+      }
+    }
+  }
+  
+  private func handleSuccessfulScreenshotCapture(url: URL,
+                                                 rect: CGRect?,
+                                                 screenshotRectHandler: ScreenshotRectHandler,
+                                                 completion: @escaping (Result<Screenshot, Error>) -> Void) {
+    if let rect = rect {
+      DispatchQueue.main.async {
+        completion(.success(.init(url: url, rect: rect.integral)))
+      }
+    } else {
+      if #available(macOS 12.0, *) {
+        DispatchQueue.main.async {
+          let rect = screenshotRectHandler.screenshotRect()
+          completion(.success(.init(url: url, rect: rect?.integral)))
+        }
+      } else {
         let attributes = self.getAttributes(for: url)
         DispatchQueue.main.async {
-          completion(.success(.init(url: url, rect: attributes)))
+          completion(.success(.init(url: url, rect: attributes?.integral)))
         }
       }
     }
+    screenshotRectHandler.stopEventsMonitor()
   }
   
   public func captureWindow(completion: @escaping ((URL?) -> Void)) {

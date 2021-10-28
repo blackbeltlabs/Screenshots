@@ -60,12 +60,12 @@ class ViewController: NSViewController {
       params = nil
     }
     
-    cliScreenshots.createScreenshot(params: params) { [weak self ](result) in
+    cliScreenshots.createScreenshot(params: params) { [weak self] (result) in
       guard let self = self else { return }
       switch result {
       case .success(let screenshot):
         DispatchQueue.main.async {
-          self.textField.stringValue = "Success rect: \(String(describing: screenshot.rect))"
+          self.textField.stringValue = "Success rect: \(String(describing: screenshot.rect?.integral))"
           let image = NSImage(byReferencing: screenshot.url)
           self.imageView.image = image
         }
