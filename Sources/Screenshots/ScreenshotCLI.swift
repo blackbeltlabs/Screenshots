@@ -63,6 +63,10 @@ public class ScreenshotCLI {
       
       task.arguments = [args, url.path]
       task.qualityOfService = .userInteractive
+      
+      let screenshotRectHandler = ScreenshotRectHandler()
+      
+      screenshotRectHandler.startEventsMonitor()
             
       task.launch()
       task.waitUntilExit()
@@ -82,9 +86,10 @@ public class ScreenshotCLI {
           return
         }
         
-        let attributes = self.getAttributes(for: url)
+       // let attributes = self.getAttributes(for: url)
+        let rect = screenshotRectHandler.screenshotRect()
         DispatchQueue.main.async {
-          completion(.success(.init(url: url, rect: attributes)))
+          completion(.success(.init(url: url, rect: rect)))
         }
       }
     }
