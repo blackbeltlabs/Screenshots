@@ -71,11 +71,12 @@ public class ScreenshotCLI {
       
       task.arguments = [args, url.path]
       task.qualityOfService = .userInteractive
-      
+       
       let screenshotRectHandler = ScreenshotRectHandler()
-      
-      DispatchQueue.main.async {
-        screenshotRectHandler.startEventsMonitor()
+      if #available(macOS 12.0, *) {
+        DispatchQueue.main.async {
+          screenshotRectHandler.startEventsMonitor()
+        }
       }
     
       task.launch()
@@ -125,6 +126,7 @@ public class ScreenshotCLI {
         }
       }
     }
+    screenshotRectHandler.stopEventsMonitor()
   }
   
   public func captureWindow(completion: @escaping ((URL?) -> Void)) {

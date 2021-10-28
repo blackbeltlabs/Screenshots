@@ -22,6 +22,10 @@ final class ScreenshotRectHandler {
     }
   }
   
+  func stopEventsMonitor() {
+    mouseEventsHandler.stopListening()
+  }
+  
   func screenshotRect() -> CGRect? {
     guard let mouseDownLocation = mouseDownLocation,
           let mouseUpLocation = self.mouseUpLocation else {
