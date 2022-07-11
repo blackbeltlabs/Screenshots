@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -721,8 +721,8 @@
                                 </connections>
                             </button>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Srk-J0-g5K">
-                                <rect key="frame" x="0.0" y="66" width="480" height="204"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="wWT-F2-G6X"/>
+                                <rect key="frame" x="36" y="66" width="408" height="137"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="wWT-F2-G6X"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZfK-AB-imd">
                                 <rect key="frame" x="238" y="40" width="4" height="16"/>
@@ -826,7 +826,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="bHh-9L-2hp" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="14" id="1BH-iQ-aD9"/>
-                            <constraint firstAttribute="trailing" secondItem="Srk-J0-g5K" secondAttribute="trailing" id="1g0-1t-DfI"/>
+                            <constraint firstAttribute="trailing" secondItem="Srk-J0-g5K" secondAttribute="trailing" constant="36" id="1g0-1t-DfI"/>
                             <constraint firstItem="FoD-a0-Pkp" firstAttribute="top" secondItem="ZfK-AB-imd" secondAttribute="bottom" constant="10" id="2ju-Nn-dNN"/>
                             <constraint firstItem="bHh-9L-2hp" firstAttribute="centerY" secondItem="FoD-a0-Pkp" secondAttribute="centerY" id="3be-T1-lwr"/>
                             <constraint firstItem="ZfK-AB-imd" firstAttribute="top" secondItem="Srk-J0-g5K" secondAttribute="bottom" constant="10" id="9Ek-F5-oya"/>
@@ -834,13 +834,13 @@
                             <constraint firstItem="ZfK-AB-imd" firstAttribute="centerX" secondItem="FoD-a0-Pkp" secondAttribute="centerX" id="F0G-wy-MoS"/>
                             <constraint firstItem="toi-UU-OIU" firstAttribute="top" secondItem="EA5-nh-fbT" secondAttribute="bottom" constant="12" id="Iur-jG-quS"/>
                             <constraint firstItem="EA5-nh-fbT" firstAttribute="trailing" secondItem="toi-UU-OIU" secondAttribute="trailing" id="O3t-w9-ZZr"/>
-                            <constraint firstItem="Srk-J0-g5K" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="Tib-5S-q6G"/>
+                            <constraint firstItem="Srk-J0-g5K" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="67" id="Tib-5S-q6G"/>
                             <constraint firstItem="0Sf-sL-K7T" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="38" id="Y1g-R5-SPg"/>
                             <constraint firstItem="toi-UU-OIU" firstAttribute="centerY" secondItem="FoD-a0-Pkp" secondAttribute="centerY" id="bQE-nM-99w"/>
                             <constraint firstItem="0Sf-sL-K7T" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="daO-S4-YLt"/>
                             <constraint firstItem="FoD-a0-Pkp" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="eJg-MV-M8P"/>
                             <constraint firstAttribute="bottom" secondItem="FoD-a0-Pkp" secondAttribute="bottom" constant="10" id="l1o-Pz-Ffh"/>
-                            <constraint firstItem="Srk-J0-g5K" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="xAy-gZ-0VZ"/>
+                            <constraint firstItem="Srk-J0-g5K" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="36" id="xAy-gZ-0VZ"/>
                         </constraints>
                     </view>
                     <connections>

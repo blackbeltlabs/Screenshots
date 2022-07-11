@@ -34,6 +34,8 @@ class ViewController: NSViewController {
     // Update the view, if already loaded.
     }
   }
+    
+    
   
   // MARK: - Actions
   
@@ -67,7 +69,7 @@ class ViewController: NSViewController {
         DispatchQueue.main.async {
           self.textField.stringValue = "Success rect: \(String(describing: screenshot.rect?.integral))"
           let image = NSImage(byReferencing: screenshot.url)
-          self.imageView.image = image
+            self.imageView.image = image
         }
       case .failure(let error):
         print(error.localizedDescription)
@@ -86,8 +88,26 @@ class ViewController: NSViewController {
   @IBAction func captureWindowPressed(_ sender: Any) {
     cliScreenshots.captureWindow { [weak self] (url) in
       guard let self = self, let url = url else { return }
-      self.imageView.image = NSImage(contentsOf: url)
+        self.imageView.image = NSImage(contentsOf: url)?.resizeTo(width: 500, height: 500)
     }
   }
   
+}
+
+extension NSImage {
+    func resizeTo(width: CGFloat, height: CGFloat) -> NSImage {
+           let ratioX = width / size.width
+           let ratioY = height / size.height
+           let ratio = ratioX < ratioY ? ratioX : ratioY
+           let newHeight = size.height * ratio
+           let newWidth = size.width * ratio
+           let canvasSize = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
+           let img = NSImage(size: canvasSize)
+           img.lockFocus()
+        NSGraphicsContext.current?.imageInterpolation = .high
+           draw(in: NSRect(origin: CGPoint(x: (canvasSize.width - (size.width * ratio)) / 2, y: (canvasSize.height - (size.height * ratio)) / 2), size: NSSize(width: newWidth,height: newHeight)), from: NSRect(origin: .zero, size: size), operation: .copy, fraction: 1)
+           img.unlockFocus()
+           return img
+
+   }
 }
