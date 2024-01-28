@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ScreenshotParams {
+public struct ScreenshotParams: Sendable {
   let selectionRect: CGRect?
   
   public init(selectionRect: CGRect?) {

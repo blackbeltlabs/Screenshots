@@ -34,9 +34,11 @@ public class ScreenshotCLI {
   }
   
   public func createScreenshot(params: ScreenshotParams? = nil,
-                               completion: @escaping (Result<Screenshot, Error>) -> Void) {
+                               completion: @escaping @MainActor @Sendable (Result<Screenshot, Error>) -> Void) {
     guard let url = createScreenshotURL() else {
-      completion(.failure(ScreenshotError.screenshotDirectoryIsInvalid))
+      DispatchQueue.main.async {
+        completion(.failure(ScreenshotError.screenshotDirectoryIsInvalid))
+      }
       return
     }
     
@@ -108,7 +110,7 @@ public class ScreenshotCLI {
   private func handleSuccessfulScreenshotCapture(url: URL,
                                                  rect: CGRect?,
                                                  screenshotRectHandler: ScreenshotRectHandler,
-                                                 completion: @escaping (Result<Screenshot, Error>) -> Void) {
+                                                 completion: @escaping @MainActor @Sendable (Result<Screenshot, Error>) -> Void) {
     if let rect = rect {
       DispatchQueue.main.async {
         completion(.success(.init(url: url, rect: rect.integral)))
@@ -129,10 +131,12 @@ public class ScreenshotCLI {
     screenshotRectHandler.stopEventsMonitor()
   }
   
-  public func captureWindow(completion: @escaping ((URL?) -> Void)) {
+  public func captureWindow(completion: @escaping (@MainActor @Sendable (URL?) -> Void)) {
    
     guard let url = createWindowCaptureURL() else {
-      completion(nil)
+      DispatchQueue.main.async {
+        completion(nil)
+      }
       return
     }
     
@@ -166,8 +170,10 @@ public class ScreenshotCLI {
         } else {
       
           if task.terminationStatus != 0 {
-            print("Error: task.terminationStatus != 0")
-            completion(nil)
+            DispatchQueue.main.async {
+              print("Error: task.terminationStatus != 0")
+              completion(nil)
+            }
             return
           }
         }
