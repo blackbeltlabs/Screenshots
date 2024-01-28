@@ -1,9 +1,9 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
     name: "Screenshots",
-    platforms: [.macOS("10.13")],
+    platforms: [.macOS("10.15")],
     products: [
         .library(
             name: "Screenshots",
@@ -15,6 +15,7 @@ let package = Package(
     targets: [
         .target(
             name: "Screenshots",
-            dependencies: [])
+            dependencies: [],
+            swiftSettings: [.enableUpcomingFeature("StrictConcurrency")])
     ]
 )

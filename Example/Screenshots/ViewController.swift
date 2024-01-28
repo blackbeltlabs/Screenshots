@@ -86,7 +86,9 @@ class ViewController: NSViewController {
   @IBAction func captureWindowPressed(_ sender: Any) {
     cliScreenshots.captureWindow { [weak self] (url) in
       guard let self = self, let url = url else { return }
-      self.imageView.image = NSImage(contentsOf: url)
+      DispatchQueue.main.async {
+        self.imageView.image = NSImage(contentsOf: url)
+      }
     }
   }
   
