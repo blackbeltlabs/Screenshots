@@ -42,7 +42,7 @@ final class ScreenshotRectHandler {
 
 private extension ScreenshotRectHandler {
   func rectangleFromTwoPoints(start: CGPoint, end: CGPoint) -> CGRect? {
-      guard start != .zero && end != .zero else {
+      if start == .zero && end == .zero {
           return nil
       }
       
