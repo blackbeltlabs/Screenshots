@@ -1,6 +1,6 @@
 import Cocoa
 
-public class ScreenshotCLI {
+public class ScreenshotCLI: @unchecked Sendable {
     
   public lazy var screenshotDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
   

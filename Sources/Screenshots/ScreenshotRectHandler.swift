@@ -1,6 +1,6 @@
 import Foundation
 
-final class ScreenshotRectHandler {
+final class ScreenshotRectHandler: @unchecked Sendable {
   let mouseEventsHandler = MouseEventsHandler()
   
   private var mouseDownLocation: CGPoint?

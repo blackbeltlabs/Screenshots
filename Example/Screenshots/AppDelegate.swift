@@ -1,7 +1,7 @@
 import Cocoa
 import Screenshots
 
-@NSApplicationMain
+@main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
 
