@@ -14,11 +14,9 @@ public class ScreenshotCLI: @unchecked Sendable {
   }
   
   static public func requestNeededPermissions() {
-    if #available(macOS 10.15, *) {
       if IOHIDCheckAccess(kIOHIDRequestTypeListenEvent) == kIOHIDAccessTypeUnknown {
         IOHIDRequestAccess(kIOHIDRequestTypeListenEvent)
       }
-    }
   }
   
   func createScreenshotURL() -> URL? {
@@ -91,7 +89,6 @@ public class ScreenshotCLI: @unchecked Sendable {
                                                                          pipe.fileHandleForReading.availableData)))
           }
       } else {
-        // FIXME: - Check if url exists otherwise it means that a user cancelled the execution
         guard FileManager.default.fileExists(atPath: url.path) else {
           DispatchQueue.main.async {
             completion(.failure(ScreenshotError.userCancelled))
