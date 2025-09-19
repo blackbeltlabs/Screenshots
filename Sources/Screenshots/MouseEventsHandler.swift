@@ -71,9 +71,7 @@ class MouseEventsHandler {
     self.currentRunLoopSource = runLoopSource
     
     self.listeningCallback = listeningCallback
-    CGEvent.tapEnable(tap: eventTap, enable: true)
-    
-    CFRunLoopRun()
+    CGEvent.tapEnable(tap: eventTap, enable: true)      
   }
   
   func stopListening() {
