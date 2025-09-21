@@ -9,6 +9,8 @@ public class ScreenshotCLI: @unchecked Sendable {
   public var soundEnabled: Bool = true
   public var windowShadowEnabled: Bool = true
   
+  private let isDebug: Bool = true
+  
   public init() {
     
   }
@@ -44,9 +46,9 @@ public class ScreenshotCLI: @unchecked Sendable {
     
     let screenshotRectHandler = ScreenshotRectHandler()
     if #available(macOS 12.0, *) {
-    //  DispatchQueue.main.async {
+      DispatchQueue.global().async {
         screenshotRectHandler.startEventsMonitor()
-      //}
+      }
     }
     
     DispatchQueue.global(qos: .userInteractive).async { [weak self] in
