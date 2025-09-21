@@ -46,7 +46,12 @@ public class ScreenshotCLI: @unchecked Sendable {
     
     let soundEnabled = self.soundEnabled
     
+    let screenshotRectHandler = ScreenshotRectHandler()
     screenshotRectHandler.startEventsMonitor()
+    
+    defer {
+      screenshotRectHandler.stopEventsMonitor()
+    }
     
     
     let pipe = Pipe()
