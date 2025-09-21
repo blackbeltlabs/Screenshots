@@ -116,6 +116,7 @@ public class ScreenshotCLI: @unchecked Sendable {
       if #available(macOS 12.0, *) {
         DispatchQueue.main.async {
           let rect = screenshotRectHandler.screenshotRect()
+          print("Screenshots: Screenshot rect = \(rect)")
           completion(.success(.init(url: url, rect: rect?.integral)))
         }
       } else {

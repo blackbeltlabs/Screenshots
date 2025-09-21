@@ -12,8 +12,10 @@ final class ScreenshotRectHandler: @unchecked Sendable {
         guard let self = self else { return }
         switch result.eventType {
         case .leftMouseDown, .rightMouseDown:
+            print("Screenshots: MOUSE DOWN = \(result.locationInScreen)")
           self.mouseDownLocation = result.locationInScreen
         case .leftMouseUp, .rightMouseUp:
+            print("Screenshots: MOUSE UP = \(result.locationInScreen)")
           self.mouseUpLocation = result.locationInScreen
         }
       }
