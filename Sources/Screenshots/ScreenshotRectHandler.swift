@@ -25,6 +25,8 @@ final class ScreenshotRectHandler: @unchecked Sendable {
   }
   
   func stopEventsMonitor() {
+    mouseDownLocation = nil
+    mouseUpLocation = nil
     mouseEventsHandler.stopListening()
   }
   

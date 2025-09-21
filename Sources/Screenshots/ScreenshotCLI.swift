@@ -107,35 +107,39 @@ public class ScreenshotCLI: @unchecked Sendable {
           return
         }
         
-        self.handleSuccessfulScreenshotCapture(url: url,
-                                               rect: params?.selectionRect,
-                                               screenshotRectHandler: screenshotRectHandler,
-                                               completion: completion)
+        DispatchQueue.main.async {
+          self.handleSuccessfulScreenshotCapture(url: url,
+                                                 rect: params?.selectionRect,
+                                                 screenshotRectHandler: self.screenshotRectHandler,
+                                                 completion: completion)
+        }
       }
     }
   }
   
+  @MainActor
   private func handleSuccessfulScreenshotCapture(url: URL,
                                                  rect: CGRect?,
                                                  screenshotRectHandler: ScreenshotRectHandler,
                                                  completion: @escaping @MainActor @Sendable (Result<Screenshot, Error>) -> Void) {
     if let rect = rect {
-      DispatchQueue.main.async {
+    //  DispatchQueue.main.async {
         completion(.success(.init(url: url, rect: rect.integral)))
-      }
+     // }
     } else {
-      if #available(macOS 12.0, *) {
-        DispatchQueue.main.async {
+     // if #available(macOS 12.0, *) {
+      //  DispatchQueue.main.async {
           let rect = screenshotRectHandler.screenshotRect()
           print("Screenshots: Screenshot rect = \(rect)")
           completion(.success(.init(url: url, rect: rect?.integral)))
-        }
-      } else {
-        let attributes = self.getAttributes(for: url)
-        DispatchQueue.main.async {
-          completion(.success(.init(url: url, rect: attributes?.integral)))
-        }
-      }
+       // }
+//      } else {
+//        let attributes = self.getAttributes(for: url)
+//      //  DispatchQueue.main.async {
+//          completion(.success(.init(url: url, rect: attributes?.integral)))
+//      //
+//      }
+    //  }
     }
     screenshotRectHandler.stopEventsMonitor()
   }
