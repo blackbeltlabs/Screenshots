@@ -42,6 +42,13 @@ public class ScreenshotCLI: @unchecked Sendable {
     
     let soundEnabled = self.soundEnabled
     
+    let screenshotRectHandler = ScreenshotRectHandler()
+    if #available(macOS 12.0, *) {
+    //  DispatchQueue.main.async {
+        screenshotRectHandler.startEventsMonitor()
+      //}
+    }
+    
     DispatchQueue.global(qos: .userInteractive).async { [weak self] in
       guard let self = self else { return }
       
@@ -72,12 +79,7 @@ public class ScreenshotCLI: @unchecked Sendable {
       task.arguments = [args, url.path]
       task.qualityOfService = .userInteractive
        
-      let screenshotRectHandler = ScreenshotRectHandler()
-      if #available(macOS 12.0, *) {
-        DispatchQueue.main.async {
-          screenshotRectHandler.startEventsMonitor()
-        }
-      }
+     
     
       task.launch()
       task.waitUntilExit()
