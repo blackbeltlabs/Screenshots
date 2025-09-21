@@ -44,11 +44,13 @@ class MouseEventsHandler {
     
     let eventMask = (1 << CGEventType.leftMouseDown.rawValue) | (1 << CGEventType.leftMouseUp.rawValue) | (1 << CGEventType.rightMouseDown.rawValue) | (1 << CGEventType.rightMouseUp.rawValue)
     
+    
+    
     // need this trick to extract `self` later in C-function where we can't pass it directly
     let mySelf = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
 
     guard let eventTap = CGEvent.tapCreate(
-        tap: .cghidEventTap,
+        tap: .cgSessionEventTap,
         place: .headInsertEventTap,
         options: .listenOnly,
         eventsOfInterest: CGEventMask(eventMask),
