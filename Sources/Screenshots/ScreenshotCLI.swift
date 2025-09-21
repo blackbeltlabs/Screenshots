@@ -37,6 +37,7 @@ public class ScreenshotCLI: @unchecked Sendable {
       .appendingPathExtension("png")
   }
   
+  @MainActor
   public func createScreenshot(params: ScreenshotParams? = nil,
                                completion: @escaping @MainActor @Sendable (Result<Screenshot, Error>) -> Void) {
     guard let url = createScreenshotURL() else {
