@@ -50,7 +50,7 @@ class MouseEventsHandler {
     let mySelf = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
 
     guard let eventTap = CGEvent.tapCreate(
-        tap: .cgSessionEventTap,
+        tap: .cghidEventTap,
         place: .headInsertEventTap,
         options: .listenOnly,
         eventsOfInterest: CGEventMask(eventMask),
