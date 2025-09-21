@@ -60,16 +60,15 @@ class ViewController: NSViewController {
       params = nil
     }
     
-    cliScreenshots.createScreenshot(params: params) { [weak self] (result) in
-      guard let self = self else { return }
-      switch result {
-      case .success(let screenshot):
-        DispatchQueue.main.async {
-          self.textField.stringValue = "Success rect: \(String(describing: screenshot.rect?.integral))"
-          let image = NSImage(byReferencing: screenshot.url)
-          self.imageView.image = image
-        }
-      case .failure(let error):
+    Task { @MainActor in
+      do {
+        let screenshot = try await cliScreenshots.createScreenshot(params: params)
+        
+        self.textField.stringValue = "Success rect: \(String(describing: screenshot.rect?.integral))"
+        let image = NSImage(byReferencing: screenshot.url)
+        self.imageView.image = image
+        
+      } catch let error {
         print(error.localizedDescription)
       }
     }
@@ -84,12 +83,13 @@ class ViewController: NSViewController {
   }
   
   @IBAction func captureWindowPressed(_ sender: Any) {
-    cliScreenshots.captureWindow { [weak self] (url) in
-      guard let self = self, let url = url else { return }
-      DispatchQueue.main.async {
+    Task { @MainActor in
+      do {
+        let url = try await cliScreenshots.captureWindow()
         self.imageView.image = NSImage(contentsOf: url)
+      } catch let error {
+        print(error.localizedDescription)
       }
     }
   }
-  
 }
