@@ -65,13 +65,15 @@ class MouseEventsHandler {
       throw MouseEventsHandlerError.cantCreateMuchPortRunLoopSource
     }
     
-    CFRunLoopAddSource(CFRunLoopGetCurrent(),
+    CFRunLoopAddSource(CFRunLoopGetMain(),
                        runLoopSource,
                        .commonModes)
     self.currentRunLoopSource = runLoopSource
     
     self.listeningCallback = listeningCallback
-    CGEvent.tapEnable(tap: eventTap, enable: true)      
+    CGEvent.tapEnable(tap: eventTap, enable: true)
+    
+   // CFRunLoopRun()
   }
   
   func stopListening() {

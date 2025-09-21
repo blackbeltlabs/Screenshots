@@ -11,6 +11,10 @@ public class ScreenshotCLI: @unchecked Sendable {
   
   private let isDebug: Bool = true
   
+  private let screenshotsMouseQueue = DispatchQueue(label: "com.zappy.screenshots_mouse")
+  
+  let screenshotRectHandler = ScreenshotRectHandler()
+  
   public init() {
     
   }
@@ -44,15 +48,17 @@ public class ScreenshotCLI: @unchecked Sendable {
     
     let soundEnabled = self.soundEnabled
     
-    let screenshotRectHandler = ScreenshotRectHandler()
     if #available(macOS 12.0, *) {
-      DispatchQueue.global().async {
+    //  screenshotsMouseQueue.async {
         screenshotRectHandler.startEventsMonitor()
-      }
+   //   }
     }
     
     DispatchQueue.global(qos: .userInteractive).async { [weak self] in
       guard let self = self else { return }
+      
+      //let screenshotRectHandler = ScreenshotRectHandler()
+     
       
       let pipe = Pipe()
       let task = Process()
