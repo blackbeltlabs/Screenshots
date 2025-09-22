@@ -1,7 +1,5 @@
 import Foundation
 import CoreGraphics
-import ApplicationServices
-
 
 enum MouseEventType {
   case leftMouseUp
