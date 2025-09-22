@@ -44,6 +44,7 @@ class MouseEventsHandler {
     
     let eventMask = (1 << CGEventType.leftMouseDown.rawValue) | (1 << CGEventType.leftMouseUp.rawValue) | (1 << CGEventType.rightMouseDown.rawValue) | (1 << CGEventType.rightMouseUp.rawValue)
     
+    
     // need this trick to extract `self` later in C-function where we can't pass it directly
     let mySelf = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
 
@@ -65,15 +66,13 @@ class MouseEventsHandler {
       throw MouseEventsHandlerError.cantCreateMuchPortRunLoopSource
     }
     
-    CFRunLoopAddSource(CFRunLoopGetCurrent(),
+    CFRunLoopAddSource(CFRunLoopGetMain(),
                        runLoopSource,
                        .commonModes)
     self.currentRunLoopSource = runLoopSource
     
     self.listeningCallback = listeningCallback
-    CGEvent.tapEnable(tap: eventTap, enable: true)
-    
-    CFRunLoopRun()
+    CGEvent.tapEnable(tap: eventTap, enable: true)    
   }
   
   func stopListening() {

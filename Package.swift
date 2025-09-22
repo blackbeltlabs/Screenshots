@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "Screenshots",
-    platforms: [.macOS(.v11)],
+    platforms: [.macOS(.v15)],
     products: [
         .library(
             name: "Screenshots",
