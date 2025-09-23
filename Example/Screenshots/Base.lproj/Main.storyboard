@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24127" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24127"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -711,7 +710,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FoD-a0-Pkp">
-                                <rect key="frame" x="173" y="3" width="135" height="32"/>
+                                <rect key="frame" x="178" y="10" width="124" height="24"/>
                                 <buttonCell key="cell" type="push" title="Take Screenshot" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OJD-Kn-Yya">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -721,11 +720,11 @@
                                 </connections>
                             </button>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Srk-J0-g5K">
-                                <rect key="frame" x="0.0" y="66" width="480" height="204"/>
+                                <rect key="frame" x="0.0" y="70" width="480" height="200"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="wWT-F2-G6X"/>
                             </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZfK-AB-imd">
-                                <rect key="frame" x="238" y="40" width="4" height="16"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZfK-AB-imd">
+                                <rect key="frame" x="238" y="44" width="4" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="WVF-IS-B1s">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -733,17 +732,14 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="toi-UU-OIU">
-                                <rect key="frame" x="406" y="11" width="65" height="18"/>
+                                <rect key="frame" x="410" y="14" width="61" height="16"/>
                                 <buttonCell key="cell" type="check" title="Sound" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="TK5-eq-kUH">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="soundEnabledPressed:" target="XfG-lQ-9wD" id="Ldp-sj-Gyw"/>
-                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bHh-9L-2hp">
-                                <rect key="frame" x="7" y="3" width="132" height="32"/>
+                                <rect key="frame" x="14" y="10" width="122" height="24"/>
                                 <buttonCell key="cell" type="push" title="Capture window" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vue-ET-laP">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -753,20 +749,17 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EA5-nh-fbT">
-                                <rect key="frame" x="346" y="39" width="125" height="18"/>
+                                <rect key="frame" x="350" y="42" width="121" height="16"/>
                                 <buttonCell key="cell" type="check" title="Window shadow" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="4m1-5R-4OE">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="windowShadowEnabledPressed:" target="XfG-lQ-9wD" id="Z4Z-ZV-6a4"/>
-                                </connections>
                             </button>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Sf-sL-K7T">
-                                <rect key="frame" x="36" y="211" width="408" height="21"/>
+                                <rect key="frame" x="36" y="208" width="408" height="24"/>
                                 <subviews>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lcX-pe-kmK">
-                                        <rect key="frame" x="0.0" y="0.0" width="96" height="21"/>
+                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lcX-pe-kmK">
+                                        <rect key="frame" x="0.0" y="0.0" width="96" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="djo-e9-GGK"/>
                                         </constraints>
@@ -777,8 +770,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LQ4-3v-hBD">
-                                        <rect key="frame" x="104" y="0.0" width="96" height="21"/>
+                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LQ4-3v-hBD">
+                                        <rect key="frame" x="104" y="0.0" width="96" height="24"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Y" drawsBackground="YES" id="yLx-XD-MUU">
                                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="10i-3i-yar"/>
                                             <font key="font" metaFont="system"/>
@@ -786,8 +779,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wJp-ie-QNh">
-                                        <rect key="frame" x="208" y="0.0" width="96" height="21"/>
+                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wJp-ie-QNh">
+                                        <rect key="frame" x="208" y="0.0" width="96" height="24"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Width" drawsBackground="YES" id="Bca-wu-ZYW">
                                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="2sh-sh-Wjr"/>
                                             <font key="font" metaFont="system"/>
@@ -795,8 +788,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="96h-fG-XLQ">
-                                        <rect key="frame" x="312" y="0.0" width="96" height="21"/>
+                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="96h-fG-XLQ">
+                                        <rect key="frame" x="312" y="0.0" width="96" height="24"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Height" drawsBackground="YES" id="o9i-A4-udx">
                                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="gGy-pi-AnN"/>
                                             <font key="font" metaFont="system"/>
