@@ -1,10 +1,15 @@
 import Cocoa
 
+@MainActor
 public final class ScreenshotCLI: Sendable {
+  
+  private var fileManager: FileManager {
+    FileManager.default
+  }
   
   // MARK: - Screenshot parameters
   private var screenshotDirectory: URL? {
-    FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
+    fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first
   }
       
   public init() { }
@@ -28,7 +33,6 @@ public final class ScreenshotCLI: Sendable {
   }
   
   
-  @MainActor
   public func createScreenshot(params: ScreenshotParams? = nil, soundEnabled: Bool) async throws(ScreenshotError) -> Screenshot {
     guard let url = createScreenshotURL() else {
       throw ScreenshotError.screenshotDirectoryIsInvalid
@@ -43,13 +47,7 @@ public final class ScreenshotCLI: Sendable {
       screenshotRectHandler.stopEventsMonitor()
     }
     
-    
-    let pipe = Pipe()
-    let task = Process()
-    task.standardOutput = pipe
-    
-    task.launchPath = "/usr/sbin/screencapture"
-  
+
     var args = "-"
     
     if !soundEnabled {
@@ -66,21 +64,7 @@ public final class ScreenshotCLI: Sendable {
       args.append("s")
     }
     
-    task.arguments = [args, url.path]
-    task.qualityOfService = .userInteractive
-     
-    
-    task.launch()
-    task.waitUntilExit()
-    
-    guard task.terminationStatus == 0 else {
-      throw ScreenshotError.terminationStatusNotZero(Int(task.terminationStatus),
-                                                     pipe.fileHandleForReading.availableData)
-    }
-    
-    guard FileManager.default.fileExists(atPath: url.path) else {
-      throw ScreenshotError.userCancelled
-    }
+    try runTask(args: args, url: url)
     
     if let rect = params?.selectionRect {
       return .init(url: url, rect: rect.integral)
@@ -90,17 +74,12 @@ public final class ScreenshotCLI: Sendable {
     }
   }
   
-  @MainActor
+
   public func captureWindow(soundEnabled: Bool, windowShadowEnabled: Bool) async throws(ScreenshotError) -> URL {
     guard let url = createWindowCaptureURL() else {
       throw ScreenshotError.cantCreateWindowCaptureURL
     }
     
-    
-    let pipe = Pipe()
-    let task = Process()
-    task.standardOutput = pipe
-    task.launchPath = "/usr/sbin/screencapture"
     var args: String = "-w"
     
     if !soundEnabled {
@@ -111,9 +90,21 @@ public final class ScreenshotCLI: Sendable {
       args.append("o")
     }
   
+    try runTask(args: args, url: url)
+    
+    return url
+  }
+  
+  private func runTask(args: String, url: URL) throws(ScreenshotError) {
+    let pipe = Pipe()
+    let task = Process()
+    task.standardOutput = pipe
+    
+    task.launchPath = "/usr/sbin/screencapture"
+    
     task.arguments = [args, url.path]
     task.qualityOfService = .userInteractive
-  
+    
     task.launch()
     task.waitUntilExit()
     
@@ -122,7 +113,10 @@ public final class ScreenshotCLI: Sendable {
                                                      pipe.fileHandleForReading.availableData)
     }
     
-    return url
+    // if file doesn't exist then treat is as user cancelled
+    // as there is not another way to know about it
+    guard fileManager.fileExists(atPath: url.path) else {
+      throw ScreenshotError.userCancelled
+    }
   }
-
 }
