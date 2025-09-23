@@ -3,7 +3,7 @@ import Cocoa
 public final class ScreenshotCLI: Sendable {
   
   // MARK: - Screenshot parameters
-  var screenshotDirectory: URL? {
+  private var screenshotDirectory: URL? {
     FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
   }
       
