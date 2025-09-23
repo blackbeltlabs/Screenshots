@@ -53,9 +53,7 @@ public final class ScreenshotCLI: Sendable {
     var args = "-"
     
     if !soundEnabled {
-      if !soundEnabled {
         args.append("x")
-      }
     }
   
     if let rect = params?.selectionRect {
