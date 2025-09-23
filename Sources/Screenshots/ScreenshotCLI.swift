@@ -1,18 +1,13 @@
 import Cocoa
 
-public class ScreenshotCLI: @unchecked Sendable {
-    
-  public lazy var screenshotDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
+public final class ScreenshotCLI: Sendable {
   
   // MARK: - Screenshot parameters
-  
-  public var soundEnabled: Bool = true
-  public var windowShadowEnabled: Bool = true
-      
-  
-  public init() {
-    
+  private var screenshotDirectory: URL? {
+    FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
   }
+      
+  public init() { }
   
   static public func requestNeededPermissions() {
       if IOHIDCheckAccess(kIOHIDRequestTypeListenEvent) == kIOHIDAccessTypeUnknown {
@@ -34,13 +29,11 @@ public class ScreenshotCLI: @unchecked Sendable {
   
   
   @MainActor
-  public func createScreenshot(params: ScreenshotParams? = nil) async throws -> Screenshot {
+  public func createScreenshot(params: ScreenshotParams? = nil, soundEnabled: Bool) async throws(ScreenshotError) -> Screenshot {
     guard let url = createScreenshotURL() else {
       throw ScreenshotError.screenshotDirectoryIsInvalid
     }
-    
-    let soundEnabled = self.soundEnabled
-    
+        
     // this is needed to get rectangle of captured screenshot
     // as /usr/bin/xattr and kMDItemScreenCaptureGlobalRect doesn't work since macOS 12 release
     let screenshotRectHandler = ScreenshotRectHandler()
@@ -60,9 +53,7 @@ public class ScreenshotCLI: @unchecked Sendable {
     var args = "-"
     
     if !soundEnabled {
-      if !soundEnabled {
         args.append("x")
-      }
     }
   
     if let rect = params?.selectionRect {
@@ -78,8 +69,7 @@ public class ScreenshotCLI: @unchecked Sendable {
     task.arguments = [args, url.path]
     task.qualityOfService = .userInteractive
      
-   
-  
+    
     task.launch()
     task.waitUntilExit()
     
@@ -101,13 +91,11 @@ public class ScreenshotCLI: @unchecked Sendable {
   }
   
   @MainActor
-  public func captureWindow() async throws -> URL {
+  public func captureWindow(soundEnabled: Bool, windowShadowEnabled: Bool) async throws(ScreenshotError) -> URL {
     guard let url = createWindowCaptureURL() else {
       throw ScreenshotError.cantCreateWindowCaptureURL
     }
     
-    let soundEnabled = self.soundEnabled
-    let windowShadowEnabled = self.windowShadowEnabled
     
     let pipe = Pipe()
     let task = Process()
