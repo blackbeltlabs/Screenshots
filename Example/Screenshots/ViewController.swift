@@ -50,12 +50,11 @@ class ViewController: NSViewController {
     
     Task { @MainActor in
       do {
-        let screenshot = try await cliScreenshots.createScreenshot(params: params,
-                                                                   soundEnabled: soundEnabledField.state == .on)
+        let screenshot = try await cliScreenshots.captureScreenshotImage(params: params,
+                                                                         soundEnabled: soundEnabledField.state == .on)
         
         self.textField.stringValue = "Success rect: \(String(describing: screenshot.rect?.integral))"
-        let image = NSImage(byReferencing: screenshot.url)
-        self.imageView.image = image
+        self.imageView.image = screenshot.image
         
       } catch let error {
         print(error.localizedDescription)
@@ -66,9 +65,9 @@ class ViewController: NSViewController {
   @IBAction func captureWindowPressed(_ sender: Any) {
     Task { @MainActor in
       do {
-        let url = try await cliScreenshots.captureWindow(soundEnabled: soundEnabledField.state == .on,
+        let image = try await cliScreenshots.captureWindowImage(soundEnabled: soundEnabledField.state == .on,
                                                          windowShadowEnabled: windowShadowEnabledField.state == .on)
-        self.imageView.image = NSImage(contentsOf: url)
+        self.imageView.image = image
       } catch let error {
         print(error.localizedDescription)
       }
