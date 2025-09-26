@@ -20,22 +20,48 @@ public final class ScreenshotCLI: Sendable {
       }
   }
   
-  func createScreenshotURL() -> URL? {
+  private func createScreenshotURL() -> URL? {
     return screenshotDirectory?
       .appendingPathComponent("Screen Shot " + UUID().uuidString)
       .appendingPathExtension("png")
   }
   
-  func createWindowCaptureURL() -> URL? {
+  private func createWindowCaptureURL() -> URL? {
     return screenshotDirectory?
       .appendingPathComponent("Window capture " + UUID().uuidString)
       .appendingPathExtension("png")
   }
   
   
-  public func createScreenshot(params: ScreenshotParams? = nil, soundEnabled: Bool) async throws(ScreenshotError) -> Screenshot {
+  // MARK: - Public
+  
+  public func captureScreenshotImage(params: ScreenshotParams? = nil,
+                                     soundEnabled: Bool) async throws(ScreenshotError) -> ScreenshotImage {
+    
+    // 1. take screenshot
+    let screenshot = try await captureScreenshot(params: params, soundEnabled: soundEnabled)
+    
+    // 2. try to remove url on completion later (if screenshot was taken)
+    defer {
+        // remove screenshot file on the next run loop cycle
+        // to prevent possible delays in current flow
+      Task {
+          removeScreenshotFile(screenshot.url)
+      }
+    }
+    
+    // 3. try to create image
+    guard let image = NSImage(contentsOf: screenshot.url) else {
+      throw .cantCreateNSImageFromURL
+    }
+    
+    return .init(image: image, rect: screenshot.rect)
+  }
+  
+  
+  public func captureScreenshot(params: ScreenshotParams? = nil, soundEnabled: Bool) async throws(ScreenshotError) -> Screenshot {
     guard let url = createScreenshotURL() else {
-      throw ScreenshotError.screenshotDirectoryIsInvalid
+      throw .screenshotDirectoryIsInvalid
     }
         
     // this is needed to get rectangle of captured screenshot
@@ -74,10 +100,28 @@ public final class ScreenshotCLI: Sendable {
     }
   }
   
+  public func captureWindowImage(soundEnabled: Bool, windowShadowEnabled: Bool) async throws(ScreenshotError) -> NSImage {
+    // 1. take screenshot
+    let windowURL = try await captureWindow(soundEnabled: soundEnabled, windowShadowEnabled: windowShadowEnabled)
+    
+    // 2. try to remove url on completion later (if screenshot was taken)
+    defer {
+      Task {
+        removeScreenshotFile(windowURL)
+      }
+    }
+    
+    // 3. try to create image
+    guard let image = NSImage(contentsOf: windowURL) else {
+      throw .cantCreateNSImageFromURL
+    }
+    
+    return image
+  }
 
   public func captureWindow(soundEnabled: Bool, windowShadowEnabled: Bool) async throws(ScreenshotError) -> URL {
     guard let url = createWindowCaptureURL() else {
-      throw ScreenshotError.cantCreateWindowCaptureURL
+      throw .cantCreateWindowCaptureURL
     }
     
     var args: String = "-w"
@@ -109,14 +153,23 @@ public final class ScreenshotCLI: Sendable {
     task.waitUntilExit()
     
     guard task.terminationStatus == 0 else {
-      throw ScreenshotError.terminationStatusNotZero(Int(task.terminationStatus),
+      throw .terminationStatusNotZero(Int(task.terminationStatus),
                                                      pipe.fileHandleForReading.availableData)
     }
     
     // if file doesn't exist then treat is as user cancelled
     // as there is not another way to know about it
     guard fileManager.fileExists(atPath: url.path) else {
-      throw ScreenshotError.userCancelled
+      throw .userCancelled
     }
+  }
+  
+  private func removeScreenshotFile(_ url: URL) {
+    
+      do {
+        try FileManager.default.removeItem(at: url)
+      } catch let error {
+        print("Warning: can't remove screenshot file: \(error.localizedDescription)")
+      }
   }
 }

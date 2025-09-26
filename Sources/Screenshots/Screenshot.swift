@@ -1,6 +1,11 @@
-import Foundation
+import Cocoa
 
 public struct Screenshot: Sendable {
-  public var url: URL
-  public var rect: CGRect?
+  public let url: URL
+  public let rect: CGRect?
+}
+
+public struct ScreenshotImage: Sendable {
+  public let image: NSImage
+  public let rect: CGRect?
 }

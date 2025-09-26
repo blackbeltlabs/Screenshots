@@ -5,6 +5,7 @@ public enum ScreenshotError: LocalizedError, Sendable {
   case userCancelled
   case terminationStatusNotZero(_ status: Int, _ outputData: Data)
   case cantCreateWindowCaptureURL
+  case cantCreateNSImageFromURL
   
   public var errorDescription: String? {
     switch self {
@@ -16,6 +17,8 @@ public enum ScreenshotError: LocalizedError, Sendable {
       return "Error. Termination status code = \(status)"
     case .cantCreateWindowCaptureURL:
       return "Can't create url for window capture"
+    case .cantCreateNSImageFromURL:
+      return "Can't create image from file"
     }
   }
 }
