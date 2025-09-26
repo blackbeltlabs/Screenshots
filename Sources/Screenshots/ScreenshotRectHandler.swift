@@ -12,8 +12,10 @@ final class ScreenshotRectHandler {
         guard let self = self else { return }
         switch result.eventType {
         case .leftMouseDown, .rightMouseDown:
+          Log.main.debug("Mouse DOWN location: X: \(result.locationInScreen.x), Y: \(result.locationInScreen.y)")
           self.mouseDownLocation = result.locationInScreen
         case .leftMouseUp, .rightMouseUp:
+          Log.main.debug("Mouse UP location: X: \(result.locationInScreen.x), Y: \(result.locationInScreen.y)")
           self.mouseUpLocation = result.locationInScreen
         }
       }
