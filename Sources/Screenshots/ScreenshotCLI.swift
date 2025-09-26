@@ -200,6 +200,6 @@ extension CGRect: @retroactive CustomStringConvertible {
   public var description: String {
     let p1 = "(\(minX), \(minY))"
     let p2 = "(\(maxX), \(maxY))"
-    return "Min X, Y: \(p1) – Max X,Y: \(p2). Width: \(width). Height: \(height)"
+    return "Min X, Y: \(p1) – Max X, Y: \(p2). Width: \(width). Height: \(height)"
   }
 }
