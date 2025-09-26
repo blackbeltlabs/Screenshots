@@ -38,11 +38,13 @@ class MouseEventsHandler {
   
   private var listeningCallback: ((MouseEventsResult) -> Void)?
   
+  private var mouseLocation: CGPoint?
+  
   // MARK: - Start listening
   func startListening(listeningCallback: @escaping (MouseEventsResult) -> Void) throws {
     stopListening()
     
-    let eventMask = (1 << CGEventType.leftMouseDown.rawValue) | (1 << CGEventType.leftMouseUp.rawValue) | (1 << CGEventType.rightMouseDown.rawValue) | (1 << CGEventType.rightMouseUp.rawValue)
+    let eventMask = (1 << CGEventType.leftMouseDown.rawValue) | (1 << CGEventType.leftMouseUp.rawValue) | (1 << CGEventType.rightMouseDown.rawValue) | (1 << CGEventType.rightMouseUp.rawValue) | (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.keyUp.rawValue) | (1 << CGEventType.leftMouseDragged.rawValue) | (1 << CGEventType.rightMouseDragged.rawValue)
     
     
     // need this trick to extract `self` later in C-function where we can't pass it directly
@@ -107,6 +109,14 @@ class MouseEventsHandler {
     case .rightMouseDown:
       listeningCallback(.init(eventType: .rightMouseDown,
                               locationInScreen: data.event.location))
+    case .keyDown:
+      let vk = UInt16(data.event.getIntegerValueField(.keyboardEventKeycode))
+      print("Key down = \(vk)")
+    case .keyUp:
+      let vk = UInt16(data.event.getIntegerValueField(.keyboardEventKeycode))
+      print("Key up = \(vk)")
+    case .leftMouseDragged, .rightMouseDragged:
+      print("Mouse Dragged.")
     default:
       break
     }
