@@ -44,7 +44,7 @@ public final class ScreenshotCLI: Sendable {
     // 2. try to remove url on completion later (if screenshot was taken)
     defer {
         // remove screenshot file on the next run loop cycle
-        // to prevent possible delays in current flow
+        // to prevent possible delay s in current flow
       Task {
           removeScreenshotFile(screenshot.url)
       }
@@ -55,6 +55,8 @@ public final class ScreenshotCLI: Sendable {
       throw .cantCreateNSImageFromURL
     }
     
+    Log.main.debug("Returning image created from path: \(screenshot.url.path)")
+    
     return .init(image: image, rect: screenshot.rect)
   }
   
@@ -63,6 +65,8 @@ public final class ScreenshotCLI: Sendable {
     guard let url = createScreenshotURL() else {
       throw .screenshotDirectoryIsInvalid
     }
+    
+    Log.main.debug("Start capturing screenshot to save into path: \(url.path)")
         
     // this is needed to get rectangle of captured screenshot
     // as /usr/bin/xattr and kMDItemScreenCaptureGlobalRect doesn't work since macOS 12 release
@@ -91,12 +95,22 @@ public final class ScreenshotCLI: Sendable {
     }
     
     try runTask(args: args, url: url)
-    
+        
     if let rect = params?.selectionRect {
-      return .init(url: url, rect: rect.integral)
+      let selectionRect = rect.integral
+      Log.main.debug("Captured screenshot. Rect: \(selectionRect)")
+      
+      return .init(url: url, rect: selectionRect)
     } else {
-      let rect = screenshotRectHandler.screenshotRect()
-      return .init(url: url, rect: rect?.integral)
+      let selectionRect = screenshotRectHandler.screenshotRect()?.integral
+      
+      if let selectionRect {
+        Log.main.debug("Captured screenshot. Rect: \(selectionRect)")
+      } else {
+        Log.main.warning("Captured screenshot. Couldn't get selection rect")
+      }
+      
+      return .init(url: url, rect: selectionRect)
     }
   }
   
@@ -116,6 +130,8 @@ public final class ScreenshotCLI: Sendable {
       throw .cantCreateNSImageFromURL
     }
     
+    Log.main.debug("Returning window image created from path: \(windowURL.path)")
+
     return image
   }
 
@@ -123,6 +139,8 @@ public final class ScreenshotCLI: Sendable {
     guard let url = createWindowCaptureURL() else {
       throw .cantCreateWindowCaptureURL
     }
+    
+    Log.main.debug("Start capturing window to save into path: \(url.path)")
     
     var args: String = "-w"
     
@@ -135,6 +153,8 @@ public final class ScreenshotCLI: Sendable {
     }
   
     try runTask(args: args, url: url)
+    
+    Log.main.debug("Captured window.")
     
     return url
   }
@@ -167,8 +187,19 @@ public final class ScreenshotCLI: Sendable {
   private func removeScreenshotFile(_ url: URL) {
     do {
       try FileManager.default.removeItem(at: url)
+      Log.main.debug("Removed screenshot file: \(url.path)")
     } catch let error {
-      print("Warning: can't remove screenshot file: \(error.localizedDescription)")
+      Log.main.warning("Can't remove screenshot file: \(error.localizedDescription)")
     }
+  }
+}
+
+
+// MARK: - Extensions
+extension CGRect: @retroactive CustomStringConvertible {
+  public var description: String {
+    let p1 = "(\(minX), \(minY))"
+    let p2 = "(\(maxX), \(maxY))"
+    return "Min X, Y: \(p1) – Max X, Y: \(p2). Width: \(width). Height: \(height)"
   }
 }
