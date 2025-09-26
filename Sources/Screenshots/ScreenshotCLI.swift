@@ -165,11 +165,10 @@ public final class ScreenshotCLI: Sendable {
   }
   
   private func removeScreenshotFile(_ url: URL) {
-    
-      do {
-        try FileManager.default.removeItem(at: url)
-      } catch let error {
-        print("Warning: can't remove screenshot file: \(error.localizedDescription)")
-      }
+    do {
+      try FileManager.default.removeItem(at: url)
+    } catch let error {
+      print("Warning: can't remove screenshot file: \(error.localizedDescription)")
+    }
   }
 }
