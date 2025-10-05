@@ -30,19 +30,23 @@ private struct CGEventCallbackData {
   let userInfo: UnsafeMutableRawPointer?
 }
 
-class MouseEventsHandler {
+final class MouseEventsHandler {
   
   // MARK: - Properties
   private var eventTap: CFMachPort?
   private var currentRunLoopSource: CFRunLoopSource?
   
   private var listeningCallback: ((MouseEventsResult) -> Void)?
+    
+  let spaceButtonKey = 49
+  
+  var spaceButtonPressed: Bool = false
   
   // MARK: - Start listening
   func startListening(listeningCallback: @escaping (MouseEventsResult) -> Void) throws {
     stopListening()
     
-    let eventMask = (1 << CGEventType.leftMouseDown.rawValue) | (1 << CGEventType.leftMouseUp.rawValue) | (1 << CGEventType.rightMouseDown.rawValue) | (1 << CGEventType.rightMouseUp.rawValue)
+    let eventMask = (1 << CGEventType.leftMouseDown.rawValue) | (1 << CGEventType.leftMouseUp.rawValue) | (1 << CGEventType.rightMouseDown.rawValue) | (1 << CGEventType.rightMouseUp.rawValue) | (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.keyUp.rawValue)
     
     
     // need this trick to extract `self` later in C-function where we can't pass it directly
@@ -86,6 +90,8 @@ class MouseEventsHandler {
       self.currentRunLoopSource = nil
     }
     self.eventTap = nil
+    
+    spaceButtonPressed = false
   }
   
   // MARK: - Callback
@@ -107,6 +113,23 @@ class MouseEventsHandler {
     case .rightMouseDown:
       listeningCallback(.init(eventType: .rightMouseDown,
                               locationInScreen: data.event.location))
+        
+    case .keyDown:
+      let event = data.event
+      let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
+      if keyCode == spaceButtonKey {
+        print("Space button pressed")
+        spaceButtonPressed = true
+      }
+        
+    case .keyUp:        
+        let event = data.event
+        
+        let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
+        if keyCode == spaceButtonKey { // 49 — это код клавиши Space
+          print("Space button released")
+          spaceButtonPressed = false
+        }
     default:
       break
     }
