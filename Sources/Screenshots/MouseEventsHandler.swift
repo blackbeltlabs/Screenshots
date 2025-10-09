@@ -10,9 +10,10 @@ enum MouseEventType {
 }
 
 struct MouseEventsResult {
-  let eventType: MouseEventType
-  let locationInScreen: CGPoint
+  let initialCoordinate: CGPoint
+  let endCoordinate: CGPoint
 }
+
 
 enum MouseEventsHandlerError: Int, LocalizedError {
   case cantCreateEventTap = 0
@@ -30,21 +31,41 @@ private struct CGEventCallbackData {
   let userInfo: UnsafeMutableRawPointer?
 }
 
-class MouseEventsHandler {
+final class MouseEventsHandler {
   
   // MARK: - Properties
   private var eventTap: CFMachPort?
   private var currentRunLoopSource: CFRunLoopSource?
+      
+  let spaceButtonKey = 49
+  var spaceButtonPressed: Bool = false
   
-  private var listeningCallback: ((MouseEventsResult) -> Void)?
+  var initialCoordinate: CGPoint?
+  var endCoordinate: CGPoint?
+  var currentCoordinate: CGPoint?
+    
+  var mouseEventCallback: ((MouseEventsResult) -> Void)?
+    
   
   // MARK: - Start listening
   func startListening(listeningCallback: @escaping (MouseEventsResult) -> Void) throws {
     stopListening()
     
-    let eventMask = (1 << CGEventType.leftMouseDown.rawValue) | (1 << CGEventType.leftMouseUp.rawValue) | (1 << CGEventType.rightMouseDown.rawValue) | (1 << CGEventType.rightMouseUp.rawValue)
+    self.mouseEventCallback = listeningCallback
     
+    let eventTypes: [CGEventType] = [
+        .leftMouseDown,
+        .leftMouseUp,
+        .rightMouseDown,
+        .rightMouseUp,
+        .keyDown,
+        .keyUp,
+        .leftMouseDragged,
+        .rightMouseDragged
+    ]
     
+    let eventMask = eventTypes.reduce(CGEventMask(0)) { $0 | (1 << $1.rawValue) }
+
     // need this trick to extract `self` later in C-function where we can't pass it directly
     let mySelf = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
 
@@ -71,11 +92,14 @@ class MouseEventsHandler {
                        .commonModes)
     self.currentRunLoopSource = runLoopSource
     
-    self.listeningCallback = listeningCallback
-    CGEvent.tapEnable(tap: eventTap, enable: true)    
+    CGEvent.tapEnable(tap: eventTap, enable: true)
   }
   
   func stopListening() {
+    spaceButtonPressed = false
+    
+    mouseEventCallback = nil
+    
     guard let eventTap = eventTap else {
       return
     }
@@ -90,23 +114,62 @@ class MouseEventsHandler {
   
   // MARK: - Callback
   fileprivate func handleCallback(data: CGEventCallbackData) {
-    guard let listeningCallback = listeningCallback else {
+    guard let listeningCallback = mouseEventCallback else {
       return
     }
     
     switch data.type {
-    case .leftMouseDown:
-      listeningCallback(.init(eventType: .leftMouseDown,
-                              locationInScreen: data.event.location))
-    case .leftMouseUp:
-      listeningCallback(.init(eventType: .leftMouseUp,
-                              locationInScreen: data.event.location))
-    case .rightMouseUp:
-      listeningCallback(.init(eventType: .rightMouseUp,
-                              locationInScreen: data.event.location))
-    case .rightMouseDown:
-      listeningCallback(.init(eventType: .rightMouseDown,
-                              locationInScreen: data.event.location))
+    case .leftMouseDown, .rightMouseDown:
+      
+      let loc = data.event.location
+      
+      initialCoordinate = loc
+      currentCoordinate = loc
+      
+      Log.main.debug("Mouse down at \(loc.x), \(loc.y)")
+
+    case .leftMouseUp, .rightMouseUp:
+      let loc = data.event.location
+      
+      endCoordinate = data.event.location
+      
+      if let initialCoordinate, let endCoordinate {
+        listeningCallback(.init(initialCoordinate: initialCoordinate,
+                                endCoordinate: endCoordinate))
+      }
+      
+      Log.main.debug("Mouse up at \(loc.x), \(loc.y)")
+    case .leftMouseDragged, .rightMouseDragged:
+      let loc = data.event.location
+      defer {
+        self.currentCoordinate = loc
+      }
+      
+      guard let lastCurrentCoordinate = currentCoordinate, let initialCoordinate = self.initialCoordinate else {
+        return
+      }
+      
+      guard spaceButtonPressed else { return }
+        
+      let delta: CGPoint = .init(x: loc.x - lastCurrentCoordinate.x,
+                                 y: loc.y - lastCurrentCoordinate.y)
+      
+      self.initialCoordinate = .init(x: initialCoordinate.x + delta.x,
+                                     y: initialCoordinate.y + delta.y)
+    case .keyDown:
+      let event = data.event
+      let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
+      if keyCode == spaceButtonKey {
+        spaceButtonPressed = true
+      }
+        
+    case .keyUp:
+      let event = data.event
+        
+      let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
+      if keyCode == spaceButtonKey {
+        spaceButtonPressed = false
+      }
     default:
       break
     }
