@@ -151,13 +151,11 @@ final class MouseEventsHandler {
       
       guard spaceButtonPressed else { return }
         
-      
       let delta: CGPoint = .init(x: loc.x - lastCurrentCoordinate.x,
                                  y: loc.y - lastCurrentCoordinate.y)
       
       self.initialCoordinate = .init(x: initialCoordinate.x + delta.x,
                                      y: initialCoordinate.y + delta.y)
-          
     case .keyDown:
       let event = data.event
       let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
@@ -166,12 +164,12 @@ final class MouseEventsHandler {
       }
         
     case .keyUp:
-        let event = data.event
+      let event = data.event
         
-        let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
-        if keyCode == spaceButtonKey {
-          spaceButtonPressed = false
-        }
+      let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
+      if keyCode == spaceButtonKey {
+        spaceButtonPressed = false
+      }
     default:
       break
     }
