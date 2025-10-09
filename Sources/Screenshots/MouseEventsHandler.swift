@@ -169,7 +169,7 @@ final class MouseEventsHandler {
         let event = data.event
         
         let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
-        if keyCode == spaceButtonKey { // 49 — это код клавиши Space
+        if keyCode == spaceButtonKey {
           spaceButtonPressed = false
         }
     default:
