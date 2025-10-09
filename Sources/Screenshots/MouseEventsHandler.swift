@@ -38,12 +38,10 @@ final class MouseEventsHandler {
   private var currentRunLoopSource: CFRunLoopSource?
       
   let spaceButtonKey = 49
-  
   var spaceButtonPressed: Bool = false
   
   var initialCoordinate: CGPoint?
   var endCoordinate: CGPoint?
-  
   var currentCoordinate: CGPoint?
     
   var mouseEventCallback: ((MouseEventsResult) -> Void)?
@@ -121,37 +119,27 @@ final class MouseEventsHandler {
     }
     
     switch data.type {
-    case .leftMouseDown:
+    case .leftMouseDown, .rightMouseDown:
+      
       let loc = data.event.location
       
       initialCoordinate = loc
       currentCoordinate = loc
+      
+      Log.main.debug("Mouse down at \(loc.x), \(loc.y)")
 
-    case .leftMouseUp:
+    case .leftMouseUp, .rightMouseUp:
+      let loc = data.event.location
+      
       endCoordinate = data.event.location
       
       if let initialCoordinate, let endCoordinate {
         listeningCallback(.init(initialCoordinate: initialCoordinate,
                                 endCoordinate: endCoordinate))
       }
-
-
-    case .rightMouseUp:
-      endCoordinate = data.event.location
       
-      if let initialCoordinate, let endCoordinate {
-        listeningCallback(.init(initialCoordinate: initialCoordinate,
-                                endCoordinate: endCoordinate))
-      }
-    case .rightMouseDown:
-      let loc = data.event.location
-      
-      initialCoordinate = loc
-      currentCoordinate = loc
-      
+      Log.main.debug("Mouse up at \(loc.x), \(loc.y)")
     case .leftMouseDragged, .rightMouseDragged:
-      
-      print("Mouse dragged")
       let loc = data.event.location
       defer {
         self.currentCoordinate = loc
@@ -162,6 +150,7 @@ final class MouseEventsHandler {
       }
       
       guard spaceButtonPressed else { break }
+        
       
       let delta: CGPoint = .init(x: loc.x - lastCurrentCoordinate.x,
                                  y: loc.y - lastCurrentCoordinate.y)
@@ -173,7 +162,6 @@ final class MouseEventsHandler {
       let event = data.event
       let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
       if keyCode == spaceButtonKey {
-        print("Space button pressed")
         spaceButtonPressed = true
       }
         
@@ -182,7 +170,6 @@ final class MouseEventsHandler {
         
         let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
         if keyCode == spaceButtonKey { // 49 — это код клавиши Space
-          print("Space button released")
           spaceButtonPressed = false
         }
     default:

@@ -15,7 +15,7 @@ final class ScreenshotRectHandler {
         mouseUpLocation = result.endCoordinate
       }
     } catch let error {
-      print(error.localizedDescription)
+      Log.main.error("\(error.localizedDescription)")
     }
   }
   
