@@ -149,7 +149,7 @@ final class MouseEventsHandler {
         return
       }
       
-      guard spaceButtonPressed else { break }
+      guard spaceButtonPressed else { return }
         
       
       let delta: CGPoint = .init(x: loc.x - lastCurrentCoordinate.x,
