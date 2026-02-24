@@ -34,7 +34,7 @@ public final class ScreenshotCLI: Sendable {
   
   
   // MARK: - Public
-  
+
   public func captureScreenshotImage(params: ScreenshotParams? = nil,
                                      soundEnabled: Bool) async throws(ScreenshotError) -> ScreenshotImage {
     
