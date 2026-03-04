@@ -164,24 +164,30 @@ public final class ScreenshotCLI: Sendable {
     let task = Process()
     task.standardOutput = pipe
     
-    task.launchPath = "/usr/sbin/screencapture"
-    
+    let executableURL = URL(fileURLWithPath: "/usr/sbin/screencapture")
+    task.executableURL = executableURL
     task.arguments = [args, url.path]
     task.qualityOfService = .userInteractive
+       
+     do {
+       try task.run()
+     } catch let error {
+       let nsError = error as NSError
+       throw .processLaunchFailed(nsError)
+     }
     
-    task.launch()
-    task.waitUntilExit()
-    
-    guard task.terminationStatus == 0 else {
-      throw .terminationStatusNotZero(Int(task.terminationStatus),
-                                                     pipe.fileHandleForReading.availableData)
-    }
-    
-    // if file doesn't exist then treat is as user cancelled
-    // as there is not another way to know about it
-    guard fileManager.fileExists(atPath: url.path) else {
-      throw .userCancelled
-    }
+     task.waitUntilExit()
+     
+     guard task.terminationStatus == 0 else {
+       throw .terminationStatusNotZero(Int(task.terminationStatus),
+                                       pipe.fileHandleForReading.availableData)
+     }
+     
+     // if file doesn't exist then treat is as user cancelled
+     // as there is not another way to know about it
+     guard fileManager.fileExists(atPath: url.path) else {
+       throw .userCancelled
+     }
   }
   
   private func removeScreenshotFile(_ url: URL) {
