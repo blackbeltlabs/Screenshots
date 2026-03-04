@@ -172,7 +172,8 @@ public final class ScreenshotCLI: Sendable {
      do {
        try task.run()
      } catch let error {
-       throw .processLaunchFailed(error.localizedDescription)
+       let nsError = error as NSError
+       throw .processLaunchFailed(nsError)
      }
     
      task.waitUntilExit()
