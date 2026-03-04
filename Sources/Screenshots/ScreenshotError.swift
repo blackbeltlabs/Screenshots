@@ -4,6 +4,7 @@ public enum ScreenshotError: LocalizedError, Sendable {
   case screenshotDirectoryIsInvalid
   case userCancelled
   case terminationStatusNotZero(_ status: Int, _ outputData: Data)
+  case processLaunchFailed(String)
   case cantCreateWindowCaptureURL
   case cantCreateNSImageFromURL
   
@@ -19,6 +20,8 @@ public enum ScreenshotError: LocalizedError, Sendable {
       return "Can't create url for window capture"
     case .cantCreateNSImageFromURL:
       return "Can't create image from file"
+    case .processLaunchFailed(let errorMessage):
+      return "Error running capture tool: \" \(errorMessage) \""
     }
   }
 }
